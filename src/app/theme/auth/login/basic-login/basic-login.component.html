@@ -1,0 +1,173 @@
+<section class="login-block">
+  <!-- Container-fluid starts -->
+  <!-- desktop -->
+  <div class="d-none d-sm-block">
+    <div class="uob-logo">
+      <div class="row">
+        <div class="col-sm">
+          <img src="assets/images/logo_uob.png" style="margin-left: 20px" width="130px" height="37px" alt="logo.png">
+        </div>
+        <div class="col-sm">
+          <img style="float: right; margin-right:20px " src="assets/images/logo-right-by-you.png" width="45px"
+            height="37px" alt="logo.png">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Responsive -->
+  <div width="100%" class="d-block d-sm-none">
+    <div class="uob-logo">
+      <div class="row">
+        <div class="col">
+          <img src="assets/images/logo_uob.png" style="margin-left: 20px" width="130px" height="37px" alt="logo.png">
+        </div>
+        <div class="col">
+          <img style="float: right; margin-right:20px " src="assets/images/logo-right-by-you.png" width="45px"
+            height="37px" alt="logo.png">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="min-height: 100%; position: relative;">
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- Authentication card start -->
+        <form #f="ngForm" (ngSubmit)="login(f)" class="md-float-material form-material" autocomplete="off" action="javascript:">
+          <div class="auth-box card">
+            <div class="card-block">
+              <div class="row m-b-20">
+                <div class="col-md-12">
+                  <h3 class="text-center">{{ 'LABEL.SIGN_IN' | translate }}</h3>
+                  <div style="position: absolute;top: -15px; right: 5px;">
+                    <span class="lang-label">EN</span>
+                    <ui-switch class="js-single top5" color="#0F407E" switchColor="#fff" size="small"
+                      (change)="changeLanguage($event)">
+                    </ui-switch>
+                    <span class="lang-label">ID</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-primary" style="margin-bottom: 20px;">
+                <input type="text" ngModel name="username" class="form-control" #username="ngModel">
+                <span class="form-bar"></span>
+                <label class="float-label">{{ 'LABEL.USERNAME' | translate }}</label>
+              </div>
+              <div class="form-group form-primary">
+                <input type="password" hidden>
+                <input type="{{showPassword ? 'text' : 'password'}}" autocomplete="off" ngModel name="password" class="form-control"
+                  #password="ngModel">
+                <span class="show-password fa" [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}"
+                  (click)="showPassword = !showPassword"></span>
+                <span class="form-bar"></span>
+                <label class="float-label">{{ 'LABEL.PASSWORD' | translate }}</label>
+              </div>
+              <div class="row m-t-20">
+                <div class="col-md-12">
+                  <button type="submit"
+                    class="btn btn-primary btn-md btn-block text-center m-b-20 ripple light">{{ 'LABEL.SIGN_IN' | translate }}</button>
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-md-10">
+                  <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                    (click)="modalDefault.show();">{{ 'LABEL.CONTACT_US' | translate }}</a>
+                  <br>
+                  <!-- <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                    (click)="modalDefaultTAC.show();">Terms And Condition</a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- end of col-sm-12 -->
+    </div>
+    <!-- end of row -->
+  </div>
+
+  <!-- end of container-fluid -->
+  <ng2-toasty [position]="'top-right'"></ng2-toasty>
+</section>
+
+<app-modal-basic #modalDefault>
+  <div class="app-modal-header">
+    <h4 class="modal-title">{{ 'LABEL.CONTACT_US' | translate }}</h4>
+    <button type="button" class="close basic-close" (click)="modalDefault.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="app-modal-body">
+    <strong style="font-size:20px">PT. Bank UOB Indonesia</strong>
+    <p style="font-size: 15px">Call Center : 14008</p>
+  </div>
+</app-modal-basic>
+
+<form #fc="ngForm" action="javascript:">
+  <app-modal-basic #modalDefaultPassword>
+    <div class="app-modal-header">
+      <h4 class="modal-title">{{ 'LABEL.CHANGE_PASSWORD' | translate }}</h4>
+      <button type="button" class="close basic-close" (click)="closeModalDefaultPassword()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="app-modal-body">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">{{ 'LABEL.NEW_PASSWORD' | translate }}</label>
+        <div class="col-sm-9">
+          <input type="{{showPasswordNew ? 'text' : 'password'}}" [(ngModel)]="newPassword" class="form-control"
+            [ngModelOptions]="{standalone: true}" #newPass>
+          <span class="show-password2 fa" [ngClass]="{'fa-eye': showPasswordNew, 'fa-eye-slash': !showPasswordNew}"
+            (click)="showPasswordNew = !showPasswordNew"></span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">{{ 'LABEL.RETYPE_PASSWORD' | translate }}</label>
+        <div class="col-sm-9">
+          <input type="{{showPasswordRe ? 'text' : 'password'}}" [(ngModel)]="reTypePassword" class="form-control"
+            [ngModelOptions]="{standalone: true}">
+
+          <span class="show-password2 fa" [ngClass]="{'fa-eye': showPasswordRe, 'fa-eye-slash': !showPasswordRe}"
+            (click)="showPasswordRe = !showPasswordRe"></span>
+        </div>
+      </div>
+    </div>
+    <div class="app-modal-footer">
+      <div class="col-sm-12 text-right">
+        <button type="submit" (click)="changePassword()"
+          class="btn btn-primary btn-md text-center ripple light">Submit</button>
+      </div>
+    </div>
+  </app-modal-basic>
+</form>
+
+<app-modal-basic #modalDefaultTAC [dialogClass]="'modal-lg'">
+  <div class="app-modal-header">
+    <h4 class="modal-title">Terms And Condition</h4>
+    <button type="button" class="close basic-close" (click)="closeModalTAC()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div style="max-height: 350px; overflow-y:scroll;" class="app-modal-body">
+    <ng-container *ngIf="currentLang == 'en'; then tca_en; else tca_id">
+    </ng-container>
+    <ng-template #tca_en>
+      <app-tca-en></app-tca-en>
+    </ng-template>
+    <ng-template #tca_id>
+      <app-tca-id></app-tca-id>
+    </ng-template>
+  </div>
+  <div class="app-modal-footer">
+    <div class="col-sm-12 text-right">
+      <button (click)="toDashboard()" class="btn btn-primary btn-md text-center ripple light" #agree>Agree</button>
+    </div>
+  </div>
+</app-modal-basic>
+
+<app-spinner #spinner></app-spinner>
+<div class="card-header" style="position: absolute; bottom: 0; width: 100%">
+  <p> UOB Indonesia Merupakan Lembaga Perbankan <br> Yang Terdaftar Dan Diawasi Oleh Otoritas Jasa Keuangan </p>
+</div>

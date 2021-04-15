@@ -1,0 +1,262 @@
+[
+  {
+    "id": 0,
+    "bg_no": 3069,
+    "reff_no": 1550,
+    "applicant": "Kineticut",
+    "currency": "Rupiah",
+    "amount": "2,270.79",
+    "publish_date": "2014-10-27",
+    "status": "BG Approve"
+  },
+  {
+    "id": 1,
+    "bg_no": 3023,
+    "reff_no": 3495,
+    "applicant": "Noralex",
+    "currency": "Rupiah",
+    "amount": "2,855.33",
+    "publish_date": "2017-10-10",
+    "status": "Incomplate BG"
+  },
+  {
+    "id": 2,
+    "bg_no": 3256,
+    "reff_no": 2696,
+    "applicant": "Centrexin",
+    "currency": "Rupiah",
+    "amount": "1,865.02",
+    "publish_date": "2014-07-21",
+    "status": "Incomplate BG"
+  },
+  {
+    "id": 3,
+    "bg_no": 1053,
+    "reff_no": 2097,
+    "applicant": "Exotechno",
+    "currency": "Rupiah",
+    "amount": "1,875.96",
+    "publish_date": "2017-04-30",
+    "status": "Incomplate BG"
+  },
+  {
+    "id": 4,
+    "bg_no": 567,
+    "reff_no": 2316,
+    "applicant": "Comtent",
+    "currency": "Rupiah",
+    "amount": "3,117.26",
+    "publish_date": "2017-11-02",
+    "status": "BG Rejected By PLN"
+  },
+  {
+    "id": 5,
+    "bg_no": 3352,
+    "reff_no": 3014,
+    "applicant": "Geekfarm",
+    "currency": "Rupiah",
+    "amount": "2,727.48",
+    "publish_date": "2018-03-09",
+    "status": "BG Approve"
+  },
+  {
+    "id": 6,
+    "bg_no": 1650,
+    "reff_no": 3451,
+    "applicant": "Jasper",
+    "currency": "Rupiah",
+    "amount": "3,038.73",
+    "publish_date": "2015-07-12",
+    "status": "BG Approve"
+  },
+  {
+    "id": 7,
+    "bg_no": 571,
+    "reff_no": 323,
+    "applicant": "Ronelon",
+    "currency": "Rupiah",
+    "amount": "2,637.56",
+    "publish_date": "2015-06-14",
+    "status": "BG Approve"
+  },
+  {
+    "id": 8,
+    "bg_no": 2091,
+    "reff_no": 2926,
+    "applicant": "Grupoli",
+    "currency": "Rupiah",
+    "amount": "2,200.75",
+    "publish_date": "2016-09-29",
+    "status": "Incomplate BG"
+  },
+  {
+    "id": 9,
+    "bg_no": 2055,
+    "reff_no": 2535,
+    "applicant": "Geekular",
+    "currency": "Rupiah",
+    "amount": "1,844.99",
+    "publish_date": "2015-05-18",
+    "status": "BG Rejected By PLN"
+  },
+  {
+    "id": 10,
+    "bg_no": 2688,
+    "reff_no": 92,
+    "applicant": "Skinserve",
+    "currency": "Rupiah",
+    "amount": "2,039.11",
+    "publish_date": "2014-07-22",
+    "status": "BG Approve"
+  },
+  {
+    "id": 11,
+    "bg_no": 1406,
+    "reff_no": 2989,
+    "applicant": "Rotodyne",
+    "currency": "Rupiah",
+    "amount": "3,844.24",
+    "publish_date": "2014-10-08",
+    "status": "Incomplate BG"
+  },
+  {
+    "id": 12,
+    "bg_no": 635,
+    "reff_no": 3748,
+    "applicant": "Stelaecor",
+    "currency": "Rupiah",
+    "amount": "2,356.40",
+    "publish_date": "2014-05-15",
+    "status": "BG Approve"
+  },
+  {
+    "id": 13,
+    "bg_no": 833,
+    "reff_no": 1180,
+    "applicant": "Earthmark",
+    "currency": "Rupiah",
+    "amount": "2,767.60",
+    "publish_date": "2014-11-08",
+    "status": "BG Approve"
+  },
+  {
+    "id": 14,
+    "bg_no": 1152,
+    "reff_no": 992,
+    "applicant": "Nurali",
+    "currency": "Rupiah",
+    "amount": "3,245.57",
+    "publish_date": "2018-05-08",
+    "status": "BG Rejected By PLN"
+  },
+  {
+    "id": 15,
+    "bg_no": 1967,
+    "reff_no": 3566,
+    "applicant": "Aquazure",
+    "currency": "Rupiah",
+    "amount": "2,529.30",
+    "publish_date": "2016-10-14",
+    "status": "Incomplate BG"
+  },
+  {
+    "id": 16,
+    "bg_no": 476,
+    "reff_no": 1085,
+    "applicant": "Polaria",
+    "currency": "Rupiah",
+    "amount": "1,508.00",
+    "publish_date": "2018-05-03",
+    "status": "BG Approve"
+  },
+  {
+    "id": 17,
+    "bg_no": 3285,
+    "reff_no": 1574,
+    "applicant": "Metroz",
+    "currency": "Rupiah",
+    "amount": "3,881.86",
+    "publish_date": "2017-08-19",
+    "status": "BG Approve"
+  },
+  {
+    "id": 18,
+    "bg_no": 3872,
+    "reff_no": 1403,
+    "applicant": "Telequiet",
+    "currency": "Rupiah",
+    "amount": "2,186.04",
+    "publish_date": "2015-10-09",
+    "status": "Incomplate BG"
+  },
+  {
+    "id": 19,
+    "bg_no": 1794,
+    "reff_no": 3576,
+    "applicant": "Apexia",
+    "currency": "Rupiah",
+    "amount": "1,803.30",
+    "publish_date": "2017-05-27",
+    "status": "BG Rejected By PLN"
+  },
+  {
+    "id": 20,
+    "bg_no": 3523,
+    "reff_no": 3347,
+    "applicant": "Comtour",
+    "currency": "Rupiah",
+    "amount": "3,888.30",
+    "publish_date": "2017-02-19",
+    "status": "BG Approve"
+  },
+  {
+    "id": 21,
+    "bg_no": 3973,
+    "reff_no": 1628,
+    "applicant": "Decratex",
+    "currency": "Rupiah",
+    "amount": "1,474.38",
+    "publish_date": "2014-04-29",
+    "status": "BG Approve"
+  },
+  {
+    "id": 22,
+    "bg_no": 2856,
+    "reff_no": 1799,
+    "applicant": "Bostonic",
+    "currency": "Rupiah",
+    "amount": "3,935.10",
+    "publish_date": "2017-04-06",
+    "status": "Incomplate BG"
+  },
+  {
+    "id": 23,
+    "bg_no": 3627,
+    "reff_no": 750,
+    "applicant": "Ginkogene",
+    "currency": "Rupiah",
+    "amount": "1,295.93",
+    "publish_date": "2017-12-19",
+    "status": "BG Rejected By PLN"
+  },
+  {
+    "id": 24,
+    "bg_no": 1873,
+    "reff_no": 2383,
+    "applicant": "Darwinium",
+    "currency": "Rupiah",
+    "amount": "1,251.88",
+    "publish_date": "2016-11-20",
+    "status": "Incomplate BG"
+  },
+  {
+    "id": 25,
+    "bg_no": 514,
+    "reff_no": 2583,
+    "applicant": "Aquoavo",
+    "currency": "Rupiah",
+    "amount": "3,359.51",
+    "publish_date": "2014-10-24",
+    "status": "BG Approve"
+  }
+]

@@ -1,0 +1,181 @@
+<ngb-tabset (tabChange)="tabChange($event)">
+  <ngb-tab title="Bank Guarantee" id="guarantee">
+    <ng-template ngbTabContent>
+      <div [@fadeInOutTranslate] class="m-t-15">
+        <div class="col-sm-12">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Nomor Jaminan</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.nomor_jaminan}} name="nomor_jaminan" class="form-control"
+                readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Nomor Amendment</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.nomor_amendment}} name="nomor_amendment" class="form-control"
+                readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Jenis Produk</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.jenis_produk}} name="jenis_produk" class="form-control"
+                readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Jenis Jaminan</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.jenis_jaminan}} name="jenis_jaminan" class="form-control"
+                readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Nama Beneficiary</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.nama_beneficiary}} name="beneficiary" class="form-control"
+                readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Unit Pengguna</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.unit_pengguna}} name="unit_pengguna" class="form-control"
+                readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Nama Bank Penerbit</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.nama_bank_penerbit}} name="nama_bank_penerbit"
+                class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Alamat Bank Penerbit</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.alamat_bank_penerbit}} class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Nama Applicant/Principal</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.applicant}} class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Nomor Kontrak / Nomor Referensi</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.nomor_kontrak}} name="nomor_kontrak" class="form-control"
+                readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Uraian Pekerjaan</label>
+            <div class="col-sm-8">
+              <input type="text" value={{dataRegistration.uraian_pekerjaan}} class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Currency</label>
+            <div class="col-sm-8">
+              <input type="text" value="{{dataRegistration.currency}}" class=" form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Nilai Jaminan</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control"
+                value="{{dataRegistration.nilai_jaminan | number : '0.2-4' : 'id' }}" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Tanggal Terbit</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" value="{{dataRegistration.tanggal_terbit | date : 'dd-MM-yyyy'}}"
+                readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Tanggal Berlaku</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" value="{{dataRegistration.tanggal_berlaku | date : 'dd-MM-yyyy'}}"
+                readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Tanggal Berakhir</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control"
+                value="{{dataRegistration.tanggal_berakhir | date : 'dd-MM-yyyy'}}" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Tenggang Waktu Claim (hari)</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" value="{{dataRegistration.tenggang_waktu_claim}}" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Tanggal Batas Claim</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control"
+                value="{{dataRegistration.tanggal_batas_claim | date : 'dd-MM-yyyy'}}" readonly>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="dataRegistration.softcopy_jaminan_name !== ''">
+            <label class="col-sm-4 col-form-label">Soft Copy Jaminan</label>
+            <div class="col-md-8">
+              <a href="/" (click)="handleDownloadPDF()" class="text-danger" title='Download'><i
+                  class="fa fa-file-pdf-o"></i></a>
+            </div>
+          </div>
+          <!-- end of row -->
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Confirmation" id="confirmation">
+    <ng-template ngbTabContent>
+      <div [@fadeInOutTranslate] class="m-t-15">
+        <div class="col-sm-12">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Nomor Surat Konfirmasi Bank</label>
+            <div class="col-sm-8">
+              <input type="text" value="{{dataConfirmation.nomor_konfirmasi_bank}}" class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Penanda Tangan Surat Konfirmasi</label>
+            <div class="col-sm-8">
+              <input type="text" value="{{dataConfirmation.penanda_tangan_konfirmasi}}" class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Jabatan Penanda Tangan Surat Konfirmasi</label>
+            <div class="col-sm-8">
+              <input type="text" value="{{dataConfirmation.jabatan_penanda_tangan}}" class="form-control" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Tanggal Surat Konfirmasi</label>
+            <div class="col-sm-8">
+              <input type="text" value="{{dataConfirmation.tanggal_surat_konfirmasi | date : 'dd-MM-yyyy'}}"
+                class="form-control" readonly>
+
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Soft Copy Konfirmasi</label>
+            <div class="col-sm-8">
+              <a href="/" (click)="handleDownloadSuratKonfirmasi()" class="text-danger" title='Download'><i
+                  class="fa fa-file-pdf-o"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

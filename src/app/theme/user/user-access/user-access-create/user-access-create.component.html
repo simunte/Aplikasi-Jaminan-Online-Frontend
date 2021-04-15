@@ -1,0 +1,88 @@
+<div class="card">
+  <div class="card-header">
+    <h5>Create User Access</h5>
+  </div>
+  <div class="card-body">
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">{{ 'LABEL.USERNAME' | translate }}</label>
+          <div class="col-md-5">
+            <input [(ngModel)]="username" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">{{ 'LABEL.EMPLOYEE_NAME' | translate }}</label>
+          <div class="col-md-5">
+            <input [(ngModel)]="employeeName" value=employeeName class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">{{ 'LABEL.EMPLOYEE_EMAIL' | translate }}</label>
+          <div class="col-md-5">
+            <input [(ngModel)]="employeeEmail" class="form-control">
+          </div>
+        </div>
+        <div *ngIf="showSignature" class="form-group row">
+          <label class="col-sm-2 col-form-label">{{ 'LABEL.POSITION' | translate }}</label>
+          <div class="col-md-5">
+            <input [(ngModel)]="position" class="form-control">
+          </div>
+        </div>
+        <div *ngIf="showSignature" class="form-group row">
+          <label class="col-sm-2 col-form-label">{{ 'LABEL.SIGNATURE' | translate }}</label>
+          <div class="col-md-5">
+            <input type="file" #upload (click)="uploadSignature.value=null" placeholder="" (change)="uploadSignature()"
+              class="form-control" accept="image/jpg, image/gif, image/png">
+          </div>
+        </div>
+        <div *ngIf="showBeneficiary" class="form-group row">
+          <label class="col-sm-2 col-form-label" [innerHTML]="'LABEL.BENEFICIARY' | translate"></label>
+          <div class="col-md-5">
+            <!-- <div ngbDropdown class="d-inline-block">
+              <button
+                class="btn btn-outline-secondary  dropdown--bg--border input-round dropdown-style-modal custome-width-600px"
+                id="jenis_produk"
+                ngbDropdownToggle>{{selectedBeneficiary == null ? 'Pilih Beneficiary' : selectedBeneficiary}}</button>
+              <div ngbDropdownMenu style="max-height: 150px; overflow: scroll;">
+                <button class="dropdown-item" (click)="handleBeneficiary(bnf)"
+                  *ngFor="let bnf of allBeneficiary; let index = index">{{bnf.nama_beneficiary}}</button>
+              </div>
+              <br>
+            </div> -->
+
+            <ng-select [ngClass]="'ng-select'" [options]="beneficaryDDL" [(ngModel)]="selectedBeneficiary"
+              [placeholder]="'LABEL.CHOOSE_BENEFICIARY' | translate" (selected)="handleBeneficiary($event)">
+            </ng-select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">{{ 'LABEL.USER_GROUP' | translate }}</label>
+          <div class="col-md-5">
+
+            <ng-select [ngClass]="'ng-select'" [options]="roleDDL" [(ngModel)]="selectedRole"
+              [placeholder]="'LABEL.CHOOSE_GROUP' | translate" (selected)="handleRole($event)"> {{ 'LABEL.USER_GROUP' | translate }} </ng-select>
+            <!--
+            <div ngbDropdown class="d-inline-block">
+              <button
+                class="btn btn-outline-secondary  dropdown--bg--border input-round dropdown-style-modal custome-width-600px"
+                id="jenis_produk" ngbDropdownToggle>{{selectedRole == null ? 'Pilih Group' : selectedRole}}</button>
+              <div ngbDropdownMenu style="max-height: 150px; overflow: scroll;">
+                <button class="dropdown-item" (click)="handleRole(role)"
+                  *ngFor="let role of allRole; let index = index">{{role.name}}</button>
+              </div>
+              <br>
+            </div> -->
+
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-7 text-right">
+            <button (click)="submit()" class="btn btn-primary btn-md text-center m-b-20 ripple light" [innerHTML]="'BUTTON.SUBMIT' | translate"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-spinner #spinner></app-spinner>

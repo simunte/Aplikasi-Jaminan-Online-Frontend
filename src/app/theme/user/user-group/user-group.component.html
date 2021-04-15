@@ -1,0 +1,67 @@
+<div class="card">
+  <div class="card-header">
+    <h5>{{'MENU.USER_GROUP' | translate}} </h5>
+  </div>
+  <div class="card-body">
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div class="dt-responsive table-responsive">
+          <table id="simpletable" 
+          class="table table-striped table-bordered nowrap"
+          [mfData]="allRole | dataFilterCustom : filter" 
+          #mf="mfDataTable"
+          [mfRowsOnPage]="rowsOnPage" 
+          [(mfSortBy)]="sortBy" 
+          [(mfSortOrder)]="sortOrder">
+            <thead>
+              <tr>
+                <th>
+                    <mfDefaultSorter  by="name">{{'LABEL.USER_GROUP' | translate}}</mfDefaultSorter>
+                </th>
+                <th>
+                    <mfDefaultSorter  by="modifiedDate">{{'LABEL.MODIFIED_DATE' | translate}}</mfDefaultSorter>
+                </th>
+                <th>
+                    <mfDefaultSorter  by="modifiedBy">{{'LABEL.MODIFIED_BY' | translate}}</mfDefaultSorter>
+                </th>
+                <th [innerHTML]="'LABEL.STATUS' | translate">
+                    <mfDefaultSorter  by="status"></mfDefaultSorter>
+                </th>
+                <th>
+                    <mfDefaultSorter  by="note">{{'LABEL.COMMENT' | translate}}</mfDefaultSorter>
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <input class="form-control" [(ngModel)]="filter.name" (ngModelChange)="filterChanged($event)">
+                </td>
+                <td></td>
+                <td>
+                  <input class="form-control" [(ngModel)]="filter.modifiedBy" (ngModelChange)="filterChanged($event)">
+                </td>
+                <td>
+                  <input class="form-control" [(ngModel)]="filter.status" (ngModelChange)="filterChanged($event)">
+                </td>
+                <td>
+                  <input class="form-control" [(ngModel)]="filter.note" (ngModelChange)="filterChanged($event)">
+                </td>
+              </tr>
+            </thead>
+            <tbody [formGroup]="form">
+              <tr style="padding: 0" formArrayName="role" *ngFor="let role of mf.data; let i = index">
+                <td><a style="color: blue; cursor:grab"
+                    [routerLink]="['./user-group-create', role.id]">{{role.name}}</a>
+                </td>
+                <td>{{role.modifiedDate | date:'dd-MM-yyyy'}}</td>
+                <td>{{role.modifiedBy}}</td>
+                <td>{{role.status}}</td>
+                <td>{{role.status == 'REJECTED' ? role.note : ''}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="card-body">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">{{'LABEL.USER_GROUP' | translate}}</label>
+      <div class="col-sm-10">
+        <input [readOnly]="inUpdate" [(ngModel)]="groupName" class="form-control col-sm-5">
+      </div>
+    </div>
+    <div class="d-flex flex-column justify-content-start">
+      <div class="dt-responsive table-responsive">
+        <table class="table table-striped table-bordered nowrap">
+          <thead>
+            <tr>
+              <th [innerHTML]="'LABEL.MENU' | translate"></th>
+              <th [innerHTML]="'LABEL.CREATE' | translate"></th>
+              <th [innerHTML]="'LABEL.READ' | translate"></th>
+              <th [innerHTML]="'LABEL.UPDATE' | translate">{{ 'LABEL.UPDATE' | translate }}</th>
+              <th [innerHTML]="'LABEL.DELETE' | translate">{{ 'LABEL.DELETE' | translate }}</th>
+              <th [innerHTML]="'LABEL.APPROVE' | translate"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let menu of menus; let i = index">
+              <td>{{menu.name}}</td>
+              <td> <input type="checkbox" [disabled]="inUpdate" [checked]="menu.create_access"
+                  (change)="handleCheckBox($event,'create',i)">
+              <td> <input type="checkbox" [disabled]="inUpdate" [checked]="menu.read_access"
+                  (change)="handleCheckBox($event,'read',i)">
+              <td> <input type="checkbox" [disabled]="inUpdate" [checked]="menu.update_access"
+                  (change)="handleCheckBox($event,'update',i)">
+              <td> <input type="checkbox" [disabled]="inUpdate" [checked]="menu.delete_access"
+                  (change)="handleCheckBox($event,'delete',i)">
+              <td> <input type="checkbox" [disabled]="inUpdate" [checked]="menu.approval_access"
+                  (change)="handleCheckBox($event,'approval',i)">
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <ng-container *ngIf="!inUpdate">
+      <button (click)="submit(false)" class="btn btn-primary btn-md text-center ripple light" *ngIf="checkPrivilage('UPDATE')" [innerHTML]="'BUTTON.SUBMIT' | translate"  >{{ 'BUTTON.UPDATE' | translate }}</button>
+    </ng-container>
+    <ng-container *ngIf="inUpdate">
+      <button (click)="reject()" class="btn btn-danger btn-md text-center ripple light" *ngIf="checkPrivilage('APPROVE')">{{ 'BUTTON.REJECT' | translate }}</button>
+      &nbsp;
+      <button (click)="approve()" class="btn btn-primary btn-md text-center ripple light" *ngIf="checkPrivilage('APPROVE')">{{ 'BUTTON.APPROVE' | translate }}</button>
+    </ng-container>
+  </div>
+</div>
+
+<app-modal-basic #modalNote>
+  <div class="app-modal-header">
+    <h4 class="modal-title">Comment</h4>
+    <button type="button" class="close basic-close" (click)="modalNote.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div style="margin-left:1.5rem" class="app-modal-body">
+    <div class="form-group row">
+      <div class="col-md-12">
+        <textarea [(ngModel)]="note" value=note class="form-control" autosize class="form-control" rows="5"> </textarea>
+      </div>
+    </div>
+
+  </div>
+  <div class="app-modal-footer">
+    <button (click)="submit(true)" class="btn btn-danger btn-md text-center ripple light">Reject</button>
+  </div>
+</app-modal-basic>
+<app-spinner #spinner></app-spinner>

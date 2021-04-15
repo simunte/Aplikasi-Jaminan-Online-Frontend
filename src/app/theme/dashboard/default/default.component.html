@@ -1,0 +1,194 @@
+<div class="card">
+    <!-- DASHBOARD -->
+    <div class="card-body" *ngIf="listDashboard">
+        <div class="row" 
+        *ngIf="listDashboard.bank_garansi && listDashboard.bank_garansi!=''">
+          <label class="col-md-12">Bank Garansi</label>
+            <ng-container *ngFor="let item of listDashboard.bank_garansi; let i = index;">
+              <div class="col-md-6">
+                <div class="card bg-primary total-card">
+                  <div class="card-block">
+                    <div class="text-left">
+                      <a href="javascript:;" routerLink="{{handleRouterLink(item.status)}}">
+                        <p class="m-0">{{item.status}}</p>
+                      </a>
+                      <h4>{{item.jumlah_task}}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+        </div>
+        <div 
+        class="row" 
+        *ngIf="listDashboard.user && listDashboard.user!=''">
+          <label class="col-md-12">User</label>
+            <ng-container *ngFor="let item of listDashboard.user; let i = index;">
+              <div class="col-md-6">
+                <div class="card bg-primary total-card">
+                  <div class="card-block">
+                    <div class="text-left">
+                      <a href="javascript:;" routerLink="{{handleRouterLink(item.status, 'user')}}">
+                        <p class="m-0">{{item.status}}</p>
+                      </a>
+                      <h4>{{item.jumlah_task}}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div 
+          class="row" 
+          *ngIf="listDashboard.user_group && listDashboard.user_group!=''">
+            <label class="col-md-12">User Group</label>
+              <ng-container *ngFor="let item of listDashboard.user_group; let i = index;">
+                <div class="col-md-6">
+                  <div class="card bg-primary total-card">
+                    <div class="card-block">
+                      <div class="text-left">
+                        <a href="javascript:;" routerLink="{{handleRouterLinkIT(item.status, 'user_group')}}">
+                          <p class="m-0">{{item.status}}</p>
+                        </a>
+                        <h4>{{item.jumlah_task}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          <div 
+          class="row" 
+          *ngIf="listDashboard.alamat_bank_penerbit && listDashboard.alamat_bank_penerbit!=''">
+              <label class="col-md-12">Alamat Bank Penerbit</label>
+                <ng-container *ngFor="let item of listDashboard.alamat_bank_penerbit; let i = index;">
+                  <div class="col-md-6">
+                    <div class="card bg-primary total-card">
+                      <div class="card-block">
+                        <div class="text-left">
+                          <a href="javascript:;" routerLink="{{handleRouterLinkIT(item.status, 'alamat_bank_penerbit')}}">
+                            <p class="m-0">{{item.status}}</p>
+                          </a>
+                          <h4>{{item.jumlah_task}}</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+          <div 
+          class="row" 
+          *ngIf="listDashboard.beneficiary && listDashboard.beneficiary!=''">
+              <label class="col-md-12">Beneficiary</label>
+              <ng-container *ngFor="let item of listDashboard.beneficiary; let i = index;">
+                <div class="col-md-6">
+                  <div class="card bg-primary total-card">
+                    <div class="card-block">
+                      <div class="text-left">
+                        <a href="javascript:;" routerLink="{{handleRouterLinkIT(item.status, 'beneficiary')}}">
+                          <p class="m-0">{{item.status}}</p>
+                        </a>
+                        <h4>{{item.jumlah_task}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+          </div>
+          <div 
+          class="row" 
+          *ngIf="listDashboard.currency && listDashboard.currency!=''">
+              <label class="col-md-12">Currency</label>
+              <ng-container *ngFor="let item of listDashboard.currency; let i = index;">
+                <div class="col-md-6">
+                  <div class="card bg-primary total-card">
+                    <div class="card-block">
+                      <div class="text-left">
+                        <a href="javascript:;" routerLink="{{handleRouterLinkIT(item.status, 'currency')}}">
+                          <p class="m-0">{{item.status}}</p>
+                        </a>
+                        <h4>{{item.jumlah_task}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+          </div>
+          <div 
+          class="row" 
+          *ngIf="listDashboard.jenis_jaminan && listDashboard.jenis_jaminan!=''">
+              <label class="col-md-12">Jenis Jaminan</label>
+              <ng-container *ngFor="let item of listDashboard.jenis_jaminan; let i = index;">
+                <div class="col-md-6">
+                  <div class="card bg-primary total-card">
+                    <div class="card-block">
+                      <div class="text-left">
+                        <a href="javascript:;" routerLink="{{handleRouterLinkIT(item.status, 'jenis_jaminan')}}">
+                          <p class="m-0">{{item.status}}</p>
+                        </a>
+                        <h4>{{item.jumlah_task}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+          </div>
+          <div 
+          class="row" 
+          *ngIf="listDashboard.jenis_produk && listDashboard.jenis_produk!=''">
+              <label class="col-md-12">Jenis Produk</label>
+              <ng-container *ngFor="let item of listDashboard.jenis_produk; let i = index;">
+                <div class="col-md-6">
+                  <div class="card bg-primary total-card">
+                    <div class="card-block">
+                      <div class="text-left">
+                        <a href="javascript:;" routerLink="{{handleRouterLinkIT(item.status, 'jenis_produk')}}">
+                          <p class="m-0">{{item.status}}</p>
+                        </a>
+                        <h4>{{item.jumlah_task}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+          </div>
+          <div 
+          class="row" 
+          *ngIf="listDashboard.unit_pengguna && listDashboard.unit_pengguna!=''">
+              <label class="col-md-12">Unit Pengguna</label>
+              <ng-container *ngFor="let item of listDashboard.unit_pengguna; let i = index;">
+                <div class="col-md-6">
+                  <div class="card bg-primary total-card">
+                    <div class="card-block">
+                      <div class="text-left">
+                        <a href="javascript:;" routerLink="{{handleRouterLinkIT(item.status, 'unit_pengguna')}}">
+                          <p class="m-0">{{item.status}}</p>
+                        </a>
+                        <h4>{{item.jumlah_task}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+          </div>
+          <div 
+          class="row" 
+          *ngIf="listDashboard.master_configuration && listDashboard.master_configuration!=''">
+              <label class="col-md-12">Master Configuration</label>
+              <ng-container *ngFor="let item of listDashboard.master_configuration; let i = index;">
+                <div class="col-md-6">
+                  <div class="card bg-primary total-card">
+                    <div class="card-block">
+                      <div class="text-left">
+                        <a href="javascript:;" routerLink="{{handleRouterLinkIT(item.status, 'master_configuration')}}">
+                          <p class="m-0">{{item.status}}</p>
+                        </a>
+                        <h4>{{item.jumlah_task}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+          </div>
+    </div>
+</div>

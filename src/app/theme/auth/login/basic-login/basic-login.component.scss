@@ -1,0 +1,36 @@
+$bg : black;
+
+.modal-body-tnc {
+  background: $bg
+}
+
+.uob-logo {
+  padding: 20px 0;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.login-block {
+  margin: 0 auto;
+}
+
+.show-password {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+  float: right;
+  cursor: pointer;
+}
+
+.lang-label {
+  padding: 5px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.show-password2 {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  float: right;
+  cursor: pointer;
+}

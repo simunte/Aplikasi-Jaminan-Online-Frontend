@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-body">
+    <app-guarantee-detail [dataRegistration]="dataRegistration" [dataConfirmation]="dataConfirmation"
+      (TabChange)="tabChange($event)">
+    </app-guarantee-detail>
+  </div>
+  <div class="card-footer text-right">
+    <ng-container *ngIf="checkPrivilage()">
+      <ng-container *ngIf="tabActive == tabConfirmation">
+        <button type="button" class="btn btn-primary waves-effect waves-light" 
+        (click)="approval()">
+          Settle
+        </button>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

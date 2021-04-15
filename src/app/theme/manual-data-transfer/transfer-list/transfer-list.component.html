@@ -1,0 +1,162 @@
+<div class="card">
+  <div class="card-body">
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div 
+        id="crm-contact" 
+        class="dt-responsive" 
+        *ngIf="dataList">
+          <div class="table-responsive">
+              <table 
+              class="table table-striped table-bordered full-data-table" 
+              [mfData]="dataList | dataFilterCustom : filter" 
+              #mf="mfDataTable" 
+              [mfRowsOnPage]="rowsOnPage"
+              [(mfSortBy)]="sortBy" 
+              [(mfSortOrder)]="sortOrder">
+                <thead>
+                <tr>
+                  <th *ngIf="actionCheck"></th>
+                  <th style="height: 50px;">
+                    <mfDefaultSorter  by="nomor_jaminan">{{'LABEL.NOMOR_JAMINAN' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="nomor_amendment">{{'LABEL.AMENMENDT_NOMOR' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="applicant">{{'LABEL.APPLICANT' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="jenis_produk">{{'LABEL.PRODUCT' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="jenis_jaminan">{{'MENU.JENIS_JAMINAN' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="nama_beneficiary">{{'MENU.BENEFICAIRY' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="nomor_kontrak">{{'LABEL.NOMOR_KONTRAK' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="tanggal_batas_claim">{{'LABEL.TANGGAL_BATAS_CLAIM' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="bank_guarantee_status" [innerHTML]="'LABEL.STATUS' |  translate"></mfDefaultSorter>
+                  </th>
+                </tr>
+                <tr>
+                    <td *ngIf="actionCheck">
+                      
+                    </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.nomor_jaminan" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.nomor_amendment" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.applicant" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.jenis_produk" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.jenis_jaminan" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.nama_beneficiary" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.nomor_kontrak" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.tanggal_batas_claim" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.bank_guarantee_status" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                </tr>
+                </thead>
+                
+                <tbody>
+                    <ng-container *ngFor="let item of mf.data; let i = index;">
+                        <tr style="margin: auto;">
+                            <td *ngIf="actionCheck">
+                                <label class="form-check-label" >
+                                    <input 
+                                    (click)="handleCheckedToProses(item)" 
+                                    [checked]="item.checked" 
+                                    type="checkbox">
+                                </label>
+                            </td>
+                          <td>{{item.nomor_jaminan}}</td>
+                          <td>{{item.nomor_amendment}}</td>
+                          <td>{{item.applicant}}</td>
+                          <td>{{item.jenis_produk}}</td>
+                          <td>{{item.jenis_jaminan}}</td>
+                          <td>{{item.nama_beneficiary}}</td>
+                          <td>{{item.nomor_kontrak}}</td>
+                          <td>{{item.tanggal_batas_claim | date :'dd-MM-yyyy'}}</td>
+                          <td>{{item.bank_guarantee_status}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+                <tfoot>
+                    <tr>
+                      <td colspan="10">
+                        <div class="float-left">
+                          <label class="label-control" style="margin-bottom: 0;">{{'LABEL.SHOW' | translate}}
+                            <select class="form-control input-sm full-data-show-entry" 
+                            [(ngModel)]="rowsOnPage">
+                              <option [ngValue]="10">10</option>
+                              <option [ngValue]="25">25</option>
+                              <option [ngValue]="50">50</option>
+                              <option [ngValue]="100">100</option>
+                            </select>
+                            {{'LABEL.ROWS' | translate}}
+                          </label>
+                        </div>
+                        <div class="float-right">
+                          <mfBootstrapPaginator>
+                          </mfBootstrapPaginator>
+                        </div>
+                      </td>
+                    </tr>
+                  </tfoot>
+              </table>
+              </div>
+
+              <div class="form-group row" *ngIf="actionCheck">
+                  <div class="col-sm-2">
+                      <button 
+                      (click) = handleKirimBankGuarantee();
+                      class="btn btn-danger btn-md btn-block text-center m-b-20 ripple light">Kirim</button>
+                  </div>
+              </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-spinner #spinner></app-spinner>

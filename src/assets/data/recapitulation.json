@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "bg_no": 3069,
+    "product_type": "Bank Garansi",
+    "guarantee_type": "Jaminan Penawaran",
+    "beneficiary_name": "PT. PLN",
+    "unit": "PT. Kantor Pusat",
+    "application_name": "PT XYZ",
+    "status": "BG Approve"
+  },
+  {
+    "id": 1,
+    "bg_no": 3023,
+    "product_type": "Bank Garansi",
+    "guarantee_type": "Jaminan Penawaran",
+    "beneficiary_name": "PT. PLN",
+    "unit": "PLN Unit Jawa",
+    "application_name": "PT Energi Tama",
+    "status": "BG Approve"
+  },
+  {
+    "id": 2,
+    "bg_no": 3256,
+    "product_type": "Bank Garansi",
+    "guarantee_type": "Jaminan Penawaran",
+    "beneficiary_name": "PT. PLN",
+    "unit": "PLN Unit Sumsel",
+    "application_name": "PT Listrik Jaya",
+    "status": "BG Approve"
+  }
+]

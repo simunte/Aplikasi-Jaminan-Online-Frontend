@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-body">
+    <app-guarantee-detail
+    [dataRegistration]="dataRegistration"
+    [dataConfirmation]="dataConfirmation"
+    (TabChange)="tabChange($event)">
+    </app-guarantee-detail>
+  </div>
+  <div class="card-footer text-right">
+    <ng-container>
+      <ng-container *ngIf="tabActive == tabConfirmation">
+        <button  *ngIf="checkPrivilage()"
+        type="button"
+        class="btn btn-primary waves-effect waves-light"
+        (click)="approval(ACTION_VERIFY)">
+          Verify
+        </button>
+        &nbsp;
+        <button *ngIf="checkPrivilageReject()"
+        type="button"
+        class="btn btn-danger waves-effect waves-light"
+        (click)="approval(ACTION_REJECT)">
+          Reject
+        </button>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<app-modal-basic #modalComment>
+  <div class="app-modal-header">
+    <h4 class="modal-title">Comments</h4>
+    <button type="button" class="close basic-close" (click)="modalComment.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="app-modal-body text-center">
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <textarea autosize class="form-control" rows="5" [(ngModel)]="notes"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-primary waves-effect waves-light" (click)="reject()">Submit</button>
+  </div>
+</app-modal-basic>
+
+<app-spinner #spinner></app-spinner>

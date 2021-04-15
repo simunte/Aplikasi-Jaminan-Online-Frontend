@@ -1,0 +1,469 @@
+<div class="page-body">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="md-tabs md-card-tabs">
+        <ngb-tabset #t="ngbTabset" [activeId]="activeIdTab" (tabChange)="onTabChange($event)">
+          <ngb-tab title="{{'LABEL.REGISTRATION' | translate}}" id="tab-registration">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate] class="m-t-15">
+                <!-- BG Registration card start -->
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-header-text">{{ 'LABEL.REGISTRATION' | translate }}</h5>
+                  </div>
+                  <form action="">
+                    <div class="card-body">
+                      <div class="view-info" *ngIf="editProfile">
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.NOMOR_JAMINAN' | translate }}</label>
+                          <div class="col-sm-8">
+                            <input
+                            type="text"
+                            readonly
+                            value="dataRegistration.nomor_jaminan"
+                            [(ngModel)]="dataRegistration.nomor_jaminan"
+                            name="nomor_jaminan"
+                            class="form-control"
+                            placeholder="1234-LGC-000-19">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.AMENMENDT_NOMOR' | translate }}</label>
+                          <div class="col-sm-8">
+                            <input
+                            type="text"
+                            [disabled]="disableAction"
+                            [(ngModel)]="dataRegistration.nomor_amendment"
+                            name="nomor_referensi"
+                            class="form-control"
+                            placeholder="">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'MENU.JENIS_PRODUK' | translate }}</label>
+                          <div class="col-sm-8">
+                              <ng-select
+                              [disabled]="disableAction"
+                              [ngClass]="'ng-select'"
+                              [options]="jenisProdukDDL"
+                                [placeholder]="selectedJenisProdukTitle"
+                                (selected)="changeJenisProduk($event)"
+                                [allowClear]="true"> </ng-select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'MENU.JENIS_JAMINAN' | translate }}</label>
+                          <div class="col-sm-8">
+                              <ng-select
+                              [disabled]="disableAction"
+                              [ngClass]="'ng-select'"
+                              [options]="jenisJaminanDDL"
+                                [placeholder]="selectedJenisJaminanTitle"
+                                (selected)="changeJenisJaminan($event)"
+                                [allowClear]="true"> </ng-select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'MENU.BENEFICAIRY' | translate }}</label>
+                          <div class="col-sm-8">
+                              <ng-select
+                              [disabled]="disableAction"
+                              [ngClass]="'ng-select'"
+                              [options]="beneficiaryDDL"
+                                [placeholder]="selectedBeneficiaryTitle"
+                                (selected)="changeBeneficiary($event)"
+                                [allowClear]="true"> </ng-select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.UNIT_PENGGUNA' | translate }}</label>
+                          <div class="col-sm-8">
+                              <ng-select
+                              [disabled]="disableAction"
+                              [ngClass]="'ng-select'"
+                              [options]="unitPenggunaDDL"
+                                [placeholder]="selectedUnitPenggunaTitle"
+                                (selected)="changeUnitPengguna($event)"
+                                [allowClear]="true"> </ng-select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.NAMA_BANK_PENERBIT' | translate }}</label>
+                          <div class="col-sm-8">
+                            <input type="text"
+                            [disabled]="disableAction"
+                            [(ngModel)]="dataRegistration.nama_bank_penerbit"
+                            name="nama_bank_penerbit"
+                            class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'MENU.ALAMAT_BANK_PENERBIT' | translate }}</label>
+                          <div class="col-sm-8">
+                              <ng-select
+                              [disabled]="disableAction"
+                              [ngClass]="'ng-select'"
+                              [options]="alamatBankPenerbitDDL"
+                                [placeholder]="selectedAlamatBankTitle"
+                                (selected)="changeAlamatBankPenerbit($event)"
+                                [allowClear]="true"> </ng-select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{'LABEL.APPLICANT' | translate}}</label>
+                          <div class="col-sm-8">
+                            <input type="text"
+                            [disabled]="disableAction"
+                            [(ngModel)]="dataRegistration.applicant"
+                            name="applicant"
+                            class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.NOMOR_KONTRAK' | translate }}</label>
+                          <div class="col-sm-8">
+                            <input type="text"
+                            [disabled]="disableAction"
+                            [(ngModel)]="dataRegistration.nomor_kontrak"
+                            [maxlength]="maxCharsNomorKontrak"
+                            name="nomor_kontrak"
+                            class="form-control">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.URAIAN_PEKERJAAN' | translate }}</label>
+                          <div class="col-sm-8">
+                              <textarea type="text"
+                              [disabled]="disableAction"
+                              [(ngModel)]="dataRegistration.uraian_pekerjaan"
+                              [maxlength]="maxCharsUraianPekerjaan"
+                              name="uraian_pekerjaan"
+                              class="form-control">
+                              </textarea>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{'MENU.CURRENCY' | translate}}</label>
+                          <div class="col-sm-8">
+                              <ng-select
+                              [disabled]="disableAction"
+                              [ngClass]="'ng-select'"
+                              [options]="datCurrencyDDL"
+                                [placeholder]="selectCurrencyTitle"
+                                (selected)="changeCurrency($event)"
+                                [allowClear]="true"> </ng-select>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.NILAI_JAMINAN' | translate }}</label>
+                          <div class="col-sm-8">
+                            <input type="text"
+                            [disabled]="disableAmount"
+                            class="form-control"
+                            placeholder="{{dataRegistration.nilai_jaminan ? (dataRegistration.nilai_jaminan | number:'2.') : '-'}}"
+                            currencyMask type="tel"
+                            [(ngModel)] = "dataRegistration.nilai_jaminan"
+                            name="nilai_jaminan"
+                            currencyMask [options]="{ align: 'left', prefix: '', precision: '2', thousands: '.', decimal: ',' }"
+                            >
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.TANGGAL_TERBIT' | translate }}</label>
+                          <div class="col-sm-8">
+                              <section>
+                                    <input
+                                    #d="ngbDatepicker"
+                                    class="form-control"
+                                    [disabled]="disableAction"
+                                    placeholder="{{dataRegistration.tanggal_terbit | date :'dd-MM-yyyy'}}"
+                                    (click)="d.toggle()"
+                                    (ngModelChange)="onSelectedPublishDate($event)"
+                                    ngbDatepicker
+                                    name="publishDate"
+                                    #publishDate="ngModel"
+                                    [(ngModel)]="tanggalTerbit"
+                                    [placement]="placement"
+                                    >
+                              </section>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.TANGGAL_BERLAKU' | translate }}</label>
+                          <div class="col-sm-8">
+                            <section>
+                                <input
+                                class="form-control"
+                                [disabled]="disableAction"
+                                placeholder="{{dataRegistration.tanggal_berlaku | date :'dd-MM-yyyy'}}"
+                                (click)="effectiveDatePicker.toggle()"
+                                name="effectiveDate"
+                                #effectiveDate="ngModel"
+                                [(ngModel)]="tanggalBerlaku"
+                                (ngModelChange)="onSelectedEffectiveDate($event)"
+                                ngbDatepicker
+                                #effectiveDatePicker="ngbDatepicker"
+                                [markDisabled]="isDisabled"
+                                [placement]="placement">
+                            </section>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.TANGGAL_BERAKHIR' | translate }}</label>
+                          <div class="col-sm-8">
+                            <section>
+                                <input class="form-control"
+                                [disabled]="disableAction"
+                                placeholder="{{dataRegistration.tanggal_berakhir | date :'dd-MM-yyyy'}}"
+                                (click)="endDatePicker.toggle()"
+                                name="endDate"
+                                #endDate="ngModel"
+                                [(ngModel)]="tanggalBerakhir"
+                                (ngModelChange)="onSelectedEndDate($event)"
+                                ngbDatepicker #endDatePicker="ngbDatepicker"
+                                [markDisabled]="isDisabled"
+                                [placement]="placement">
+                            </section>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.TENGGANG_WAKTU_CLAIM' | translate }}</label>
+                          <div class="col-sm-8">
+                            <input type="text"
+                            [disabled]="disableAction"
+                            class="form-control"
+                            value="{{dataRegistration.tenggang_waktu_claim}}"
+                            [(ngModel)] = "dataRegistration.tenggang_waktu_claim"
+                            (keyup) = "handleCalculateClaimDate()"
+                            name="tenggang_waktu_claim">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{'LABEL.TANGGAL_BATAS_CLAIM' | translate}}</label>
+                          <div class="col-sm-8">
+                            <section>
+                                <input
+                                class="form-control"
+                                [disabled]="disableAction"
+                                placeholder="{{dataRegistration.tanggal_batas_claim | date :'dd-MM-yyyy'}}"
+                                (click)="maxClaimDatePicker.toggle()"
+                                name="maxClaimDate"
+                                #maxClaimDate="ngModel"
+                                [(ngModel)]="tanggalBatasClaim"
+                                (ngModelChange)="onMaxClaimDate($event)"
+                                ngbDatepicker #maxClaimDatePicker="ngbDatepicker"
+                                [markDisabled]="isDisabled"
+                                [placement]="placement">
+                            </section>
+                          </div>
+                        </div>
+                        <div class="form-group row"
+                        *ngIf="dataRegistration.softcopy_jaminan_name === '' || existSoftCopyJaminan==true">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.SOFTCOPY_JAMINAN' | translate }}</label>
+                          <div class="col-xl-8 col-md-6">
+                            <input type="file"
+                            #softcopyJaminan
+                            (click)="softcopyJaminan.value=null"
+                            placeholder="{{dataRegistration.softcopy_jaminan_name}}"
+                            (change)="onSelectedSoftcopyJaminan()"
+                            accept="application/pdf"
+                            [disabled]="disableAction"
+                            class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="form-group row"
+                        *ngIf="showDownloadSuratJaminan">
+                          <label class="col-sm-4 col-form-label"></label>
+                          <div class="col-sm-8 col-md-6"
+                          *ngIf="showDownloadSuratJaminan">
+                              <button
+                              class="btn btn-outline-secondary input-round custome-width-600px"
+                                id="file_download"
+                                (click)="handleDownloadPDF()">{{dataRegistration.softcopy_jaminan_name}}
+                              </button>
+                          </div>
+                        </div>
+                        <!-- end of row -->
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-xl-12 col-md-12 text-right"
+                          *ngIf="nextRegButton">
+                            <button
+                            type="button"
+                            class="btn btn-primary waves-effect waves-light"
+                            (click)="handleSaveRegistration()">
+                              {{ 'BUTTON.NEXT' | translate }}
+                            </button>
+                        </div>
+                        <div class="col-xl-12 col-md-12 text-right"
+                        *ngIf="nextRegButton == false">
+                          <button
+                          class="btn btn-primary waves-effect waves-light"
+                          (click)="t.select('tab-confirmation')">
+                          {{ 'BUTTON.NEXT' | translate }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+                  <!-- end of card-body -->
+                </div>
+                <!-- BG Registration card end-->
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab *ngIf="tabConfirmation" title="{{ 'LABEL.KONFIRMASI' | translate }}" id="tab-confirmation">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate] class="m-t-15">
+                <!-- BG Confirmation card start -->
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-header-text">{{ 'LABEL.KONFIRMASI' | translate }}</h5>
+                  </div>
+                  <form action="">
+                    <div class="card-body">
+                      <div class="view-info" *ngIf="editProfile">
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.NOMOR_SURAT_KONF' | translate }}</label>
+                          <div class="col-sm-8">
+                            <input type="text"
+                            readonly
+                            class="form-control"
+                            placeholder="2019/NTRO-BG/001"
+                            [(ngModel)]="dataConfirmation.nomor_konfirmasi_bank"
+                            name="nomor_konfirmasi_bank">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.PENANDATANGAN_SURAT_KONFIRMASI_BANK' | translate }}</label>
+                          <div class="col-sm-8">
+                            <input type="text"
+                            readonly
+                            class="form-control"
+                            placeholder=""
+                            [(ngModel)]="dataConfirmation.penanda_tangan_konfirmasi"
+                            name="penanda_tangan_konfirmasi">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.JABATAN_PENANDA_TANGAN_SURAT_KONFIRMASI' | translate }}</label>
+                          <div class="col-sm-8">
+                            <input type="text"
+                            readonly
+                            class="form-control"
+                            placeholder=""
+                            [(ngModel)]="dataConfirmation.jabatan_penanda_tangan"
+                            name="jabatan_penanda_tangan">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.TANGGAL_SURAT_KONFIRMASI' | translate }}</label>
+                          <div class="col-sm-8">
+                              <section>
+                                <input class="form-control"
+                                readonly
+                                value="{{dataConfirmation.tanggal_surat_konfirmasi | date :'yyyy-MM-dd'}}">
+                              </section>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">{{ 'LABEL.SOFTCOPY_OF_BANK_CONFIRMATION_LETTER' | translate }}</label>
+                          <div class="col-sm-8">
+                            <button *ngIf="showDownloadSuratKonfirmasi"
+                            class="btn btn-outline-secondary input-round custome-width-600px"
+                                id="file_download"
+                                (click)="handleDownloadSuratKonfirmasi()">Download Surat Konfirmasi
+                              </button>
+                          </div>
+                        </div>
+                        <!-- end of row -->
+                      </div>
+                      <div class="form-group row text-right">
+                        <div class="col-xl-12 col-md-6 ">
+                          <button *ngIf="saveDraftButton"
+                          class="btn btn-primary waves-effect waves-light"
+                          (click)="handleSaveAsDraft()">{{ 'BUTTON.SAVE_AS_DRAFT' | translate }}</button>
+                          &nbsp;
+                          <button *ngIf="submitButton"
+                            class="btn btn-danger waves-effect waves-light"
+                            (click)="handleSubmit()">{{'BUTTON.SUBMIT' | translate}}</button>
+                      </div>
+                      <div class="col-xl-12 col-md-6" >
+                          <button *ngIf="approveButton"
+                          class="btn btn-primary waves-effect waves-light"
+                          (click)="handleApprovalAcc()">{{'BUTTON.APPROVE' | translate}}</button>
+                          &nbsp;
+                          <button *ngIf="rejectButton"
+                          class="btn btn-danger waves-effect waves-light"
+                          (click)="showModalAlasanReject()">{{'BUTTON.REJECT' | translate}}</button>
+                      </div>
+                      <div class="col-xl-12 col-md-12">
+                        <button *ngIf="nextButton"
+                        class="btn btn-primary waves-effect waves-light"
+                        (click)="t.select('tab-history')">{{'BUTTON.NEXT' | translate}}</button>
+                      </div>
+                      </div>
+                    </div>
+                </form>
+                </div>
+                <!-- BG Confirmation card end -->
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab *ngIf="tabHistory" title="{{ 'LABEL.BG_HISTORY' | translate }}" id="tab-history">
+            <ng-template ngbTabContent>
+              <div [@fadeInOutTranslate] class="m-t-15">
+                <!-- BG History card start -->
+                <app-card [title]="'LABEL.BG_HISTORY' | translate" [cardClass]="'latest-update-card'" [headerClass]="'borderless'">
+                  <div class="latest-update-box" *ngFor="let data of dataHistoryBankGuarantee; let index = index">
+                    <div class="row p-t-20 p-b-20">
+                      <div class="col-auto text-right update-meta">
+                        <!-- <p class="text-muted m-b-0 d-inline">{{data.date_created | date :'dd-MM-yyyy, hh:mm a'}}</p> -->
+                        <i class="feather icon-check bg-c-green update-icon m-l-50"></i>
+                      </div>
+                      <div class="col">
+                        <h6>{{data.bank_guarantee_status}}</h6>
+                          <pre>Created date : {{data.date_created | date :'dd-MM-yyyy, hh:mm a'}} <br>Created by   : {{data.created_by}}</pre>
+                          <pre class="text-muted m-b-0" *ngIf="data.bank_guarantee_status=='REJECTED BG'">Comment      : {{data.notes}}</pre>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-12 col-md-12 text-right">
+                    <button
+                    class="btn btn-primary waves-effect waves-light"
+                    routerLink="/registration">{{'BUTTON.CLOSE' | translate}}</button>
+                  </div>
+                </app-card>
+                <!-- BG History card end -->
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-animation [modalID]="'modalAlasanReject'" [modalClass]="'md-effect-2'">
+  <h3 style="font-size: 26px;">{{'REASON_REJECTION' | translate}}</h3>
+    <div class="col-sm-12 input-group no-bottom-margin">
+      <textarea
+      style="min-height: 100px;"
+      type="text"
+      [(ngModel)]="alasan_reject"
+      name="alasan_reject"
+      class="form-control form-control-round"
+      placeholder="Catatan Reject">
+      </textarea>
+    </div>
+    <div class="col-xl-12 col-md-12">
+      <button class="btn btn-primary btn-block ripple light" (click)="handleApprovalRej()">{{'BUTTON.REJECT' | translate}}</button>
+  </div>
+  <button (click)="closeModalAlasanReject()" style="padding:0px;" aria-label="Close" class="md-close-btn">
+      <i class="icofont icofont-ui-close "></i>
+  </button>
+</app-modal-animation>
+
+<app-spinner #spinner></app-spinner>
+

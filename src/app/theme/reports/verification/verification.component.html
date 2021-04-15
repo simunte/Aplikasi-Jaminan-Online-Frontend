@@ -1,0 +1,242 @@
+<div class="card">
+  <div class="card-header">
+    <h5>{{'MENU.VERIFICATION' | translate}} </h5>
+  </div>
+  <div class="card-body">
+    <div class="table-content">
+      <div class="row">
+        <div class="col-sm-12">
+          <div ngbDropdown class="pull-left mb-2 mr-2">
+            <button class="btn btn-outline-secondary" ngbDropdownToggle>Export
+            </button>
+            <div ngbDropdownMenu aria-labelledby="download">
+              <a class="dropdown-item ripple light" href="javascript:"
+                *ngFor="let data of downloadKind; let index = index" (click)="exportData(data)">{{data}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive" *ngIf="dataList">
+        <table class="table table-striped table-bordered full-data-table"
+          [mfData]="dataList | dataFilterCustom : filter" 
+          #mf="mfDataTable" 
+          [mfRowsOnPage]="rowsOnPage" 
+          [(mfSortBy)]="sortBy"
+          [(mfSortOrder)]="sortOrder">
+          <thead>
+            <tr>
+              <th *ngIf="listObj[0].column_show">
+                <mfDefaultSorter by="nomor_jaminan">{{'LABEL.NOMOR_JAMINAN' | translate}}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[1].column_show">
+                <mfDefaultSorter by="nomor_amendment">{{'LABEL.AMENMENDT_NOMOR' | translate}}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[2].column_show">
+                <mfDefaultSorter by="applicant">{{'LABEL.APPLICANT' | translate}}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[3].column_show">
+                <mfDefaultSorter by="jenis_produk">{{'LABEL.PRODUCT' | translate}}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[4].column_show">
+                <mfDefaultSorter by="jenis_jaminan">{{'MENU.JENIS_JAMINAN' | translate}}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[5].column_show">
+                <mfDefaultSorter by="nama_beneficiary">{{'MENU.BENEFICAIRY' | translate}}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[6].column_show">
+                <mfDefaultSorter by="unit_pengguna">{{ 'LABEL.UNIT_PENGGUNA' | translate }}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[7].column_show">
+                <mfDefaultSorter by="nama_bank_penerbit">{{ 'LABEL.NAMA_BANK_PENERBIT' | translate }}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[8].column_show">
+                <mfDefaultSorter by="alamat_bank_penerbit">{{ 'MENU.ALAMAT_BANK_PENERBIT' | translate }}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[9].column_show">
+                <mfDefaultSorter by="nomor_kontrak">{{'LABEL.NOMOR_KONTRAK' | translate}}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[10].column_show">
+                <mfDefaultSorter by="uraian_pekerjaan">{{ 'LABEL.URAIAN_PEKERJAAN' | translate }}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[11].column_show">
+                <mfDefaultSorter by="currency">{{'MENU.CURRENCY' | translate}}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[12].column_show">
+                <mfDefaultSorter by="nilai_jaminan">{{ 'LABEL.NILAI_JAMINAN' | translate }}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[13].column_show">
+                <mfDefaultSorter by="tanggal_terbit">{{ 'LABEL.TANGGAL_TERBIT' | translate }}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[14].column_show">
+                <mfDefaultSorter by="tanggal_berlaku">{{ 'LABEL.TANGGAL_BERLAKU' | translate }}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[15].column_show">
+                <mfDefaultSorter by="tanggal_berakhir">{{ 'LABEL.TANGGAL_BERAKHIR' | translate }}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[16].column_show">
+                <mfDefaultSorter by="tenggang_waktu_claim">{{ 'LABEL.TENGGANG_WAKTU_CLAIM' | translate }}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[17].column_show">
+                <mfDefaultSorter by="tanggal_batas_claim">{{'LABEL.TANGGAL_BATAS_CLAIM' | translate}}</mfDefaultSorter>
+              </th>
+              <th *ngIf="listObj[18].column_show">
+                <mfDefaultSorter by="bank_guarantee_status" [innerHTML]="'LABEL.STATUS' | translate"></mfDefaultSorter>
+              </th>
+            </tr>
+            <tr>
+              <ng-container *ngFor="let item of listObj">
+                <td *ngIf="item.column_show">
+                  <input class="form-control" [(ngModel)]="filter[item.code]" (ngModelChange)="filterChanged($event)">
+                </td>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of mf.data; let i = index;">
+              <tr>
+                <td *ngIf="listObj[0].column_show">
+                  <a href="javascript:;" class="m-r-15"
+                    routerLink="./verification-detail/{{item.id}}">{{item.nomor_jaminan}}</a>
+                </td>
+                <td *ngIf="listObj[1].column_show">{{item.nomor_amendment}}</td>
+                <td *ngIf="listObj[2].column_show">{{item.applicant}}</td>
+                <td *ngIf="listObj[3].column_show">{{item.jenis_produk}}</td>
+                <td *ngIf="listObj[4].column_show">{{item.jenis_jaminan}}</td>
+                <td *ngIf="listObj[5].column_show">{{item.nama_beneficiary}}</td>
+                <td *ngIf="listObj[6].column_show">{{item.unit_pengguna}}</td>
+                <td *ngIf="listObj[7].column_show">{{item.nama_bank_penerbit}}</td>
+                <td *ngIf="listObj[8].column_show">{{item.alamat_bank_penerbit}}</td>
+                <td *ngIf="listObj[9].column_show">{{item.nomor_kontrak}}</td>
+                <td *ngIf="listObj[10].column_show">{{item.uraian_pekerjaan}}</td>
+                <td *ngIf="listObj[11].column_show">{{item.currency}}</td>
+                <td *ngIf="listObj[12].column_show" class="text-right">
+                  {{item.nilai_jaminan | number : '0.2-4' : 'id'}}
+                </td>
+                <td *ngIf="listObj[13].column_show">{{item.tanggal_terbit | date :'dd-MM-yyyy, hh:mm'}}</td>
+                <td *ngIf="listObj[14].column_show">{{item.tanggal_berlaku | date :'dd-MM-yyyy, hh:mm'}}</td>
+                <td *ngIf="listObj[15].column_show">{{item.tanggal_berakhir | date :'dd-MM-yyyy, hh:mm'}}</td>
+                <td *ngIf="listObj[16].column_show" class="text-right">{{item.tenggang_waktu_claim}}</td>
+                <td *ngIf="listObj[17].column_show">{{item.tanggal_batas_claim | date :'dd-MM-yyyy, hh:mm'}}</td>
+                <td *ngIf="listObj[18].column_show">{{item.bank_guarantee_status}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="7">
+                <div class="float-left">
+                  <label class="label-control" style="margin-bottom: 0;">{{'LABEL.SHOW' | translate}}
+                    <select class="form-control input-sm full-data-show-entry" [(ngModel)]="rowsOnPage">
+                      <option [ngValue]="10">10</option>
+                      <option [ngValue]="25">25</option>
+                      <option [ngValue]="50">50</option>
+                      <option [ngValue]="100">100</option>
+                    </select>
+                    {{'LABEL.ROWS' | translate}}
+                  </label>
+                </div>
+                <div class="float-right">
+                  <mfBootstrapPaginator>
+                  </mfBootstrapPaginator>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-animation [modalID]="'modalPersonalization'" [modalClass]="'md-effect-2'">
+  <h3 style="font-size: 26px;">Column</h3>
+  <button (click)="closeModalPersonalization()" style="padding:0px;" aria-label="Close" class="md-close-btn">
+    <i class="icofont icofont-ui-close "></i>
+  </button>
+  <div class="col-sm-12 my-auto">
+    <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'300px'" [config]="{}">
+      <div class="row px-4" *ngFor="let data of listObj">
+        <label>
+          <input type="checkbox" [(ngModel)]="data.column_show" (click)="columnChecked(data)">
+          {{data.name}}
+        </label>
+      </div>
+    </perfect-scrollbar>
+  </div>
+  <div class="col-xl-12 col-md-6">
+    <button class="btn btn-primary btn-block" (click)="personalizationColumn()">Save</button>
+  </div>
+</app-modal-animation>
+
+
+<div [hidden]="true" *ngIf="listObj.length > 0">
+  <table class="table table-striped table-bordered full-data-table" id="exportTable">
+    <thead>
+      <tr>
+        <th>{{'LABEL.NOMOR_JAMINAN' | translate}}
+        </th>
+        <th>{{'LABEL.AMENMENDT_NOMOR' | translate}}
+        </th>
+        <th>{{'LABEL.APPLICANT' | translate}}
+        </th>
+        <th>{{'LABEL.PRODUCT' | translate}}
+        </th>
+        <th>{{'MENU.JENIS_JAMINAN' | translate}}
+        </th>
+        <th>{{'MENU.BENEFICAIRY' | translate}}
+        </th>
+        <th>{{ 'LABEL.UNIT_PENGGUNA' | translate }}
+        </th>
+        <th>{{ 'LABEL.NAMA_BANK_PENERBIT' | translate }}
+        </th>
+        <th>{{ 'MENU.ALAMAT_BANK_PENERBIT' | translate }}
+        </th>
+        <th>{{'LABEL.NOMOR_KONTRAK' | translate}}
+        </th>
+        <th>{{ 'LABEL.URAIAN_PEKERJAAN' | translate }}
+        </th>
+        <th>{{'MENU.CURRENCY' | translate}}
+        </th>
+        <th>{{ 'LABEL.NILAI_JAMINAN' | translate }}
+        </th>
+        <th>{{ 'LABEL.TANGGAL_TERBIT' | translate }}
+        </th>
+        <th>{{ 'LABEL.TANGGAL_BERLAKU' | translate }}
+        </th>
+        <th>{{ 'LABEL.TANGGAL_BERAKHIR' | translate }}
+        </th>
+        <th>{{ 'LABEL.TENGGANG_WAKTU_CLAIM' | translate }}
+        </th>
+        <th>{{'LABEL.TANGGAL_BATAS_CLAIM' | translate}}
+        </th>
+        <th [innerHTML]="'LABEL.STATUS' | translate">
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of dataList; let i = index;">
+        <tr [ngClass]="setRowClass(item.row_color)">
+          <td>{{item.nomor_jaminan}}</td>
+          <td>{{item.nomor_amendment}}</td>
+          <td>{{item.applicant}}</td>
+          <td>{{item.jenis_produk}}</td>
+          <td>{{item.jenis_jaminan}}</td>
+          <td>{{item.nama_beneficiary}}</td>
+          <td>{{item.unit_pengguna}}</td>
+          <td>{{item.nama_bank_penerbit}}</td>
+          <td>{{item.alamat_bank_penerbit}}</td>
+          <td>{{item.nomor_kontrak}}</td>
+          <td>{{item.uraian_pekerjaan}}</td>
+          <td>{{item.currency}}</td>
+          <td class="text-right">{{item.nilai_jaminan | number : '0.2-4' : 'id'}}</td>
+          <td>{{item.tanggal_terbit | date :'dd-MM-yyyy'}}</td>
+          <td>{{item.tanggal_berlaku | date :'dd-MM-yyyy'}}</td>
+          <td>{{item.tanggal_berakhir | date :'dd-MM-yyyy'}}</td>
+          <td class="text-right">{{item.tenggang_waktu_claim}}</td>
+          <td>{{item.tanggal_batas_claim | date :'dd-MM-yyyy'}}</td>
+          <td>{{item.bank_guarantee_status}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

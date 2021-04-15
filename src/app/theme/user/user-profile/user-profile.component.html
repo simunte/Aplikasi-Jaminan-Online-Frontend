@@ -1,0 +1,80 @@
+<div class="card">
+  <div class="card-body">
+    <ngb-tabset>
+      <ngb-tab title="Detail User" id="guarantee">
+        <ng-template ngbTabContent>
+          <div [@fadeInOutTranslate] class="m-t-15">
+            <div class="col-sm-12">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Full Name </label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" [(ngModel)]="userProfile.first_name" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Position</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" [(ngModel)]="userProfile.position" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" [(ngModel)]="userProfile.email" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Change Password" id="confirmation">
+        <ng-template ngbTabContent>
+          <div [@fadeInOutTranslate] class="m-t-15">
+
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-sm-6" style="margin-bottom: 20px;">
+                  
+                </div>
+                <div class="col-sm-6 text-right">
+                  <button id="edit-btn" type="button" class="btn btn-sm btn-primary ripple light"
+                    (click)="toggleEditProfile()">
+                    <i class="icofont {{ editProfileIcon }}"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">{{ 'LABEL.NEW_PASSWORD' | translate }}</label>
+                <div class="col-sm-3">
+                  <input type="{{showPasswordNew ? 'text' : 'password'}}" [(ngModel)]="newPassword" class="form-control" [ngModelOptions]="{standalone: true}"
+                    #newPass>
+                  
+                </div>
+                <span class="show-password2 fa" style="margin-top: 10px" [ngClass]="{'fa-eye': showPasswordNew, 'fa-eye-slash': !showPasswordNew}"
+                    (click)="showPasswordNew = !showPasswordNew"></span>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">{{ 'LABEL.RETYPE_PASSWORD' | translate }}</label>
+                <div class="col-sm-3">
+                  <input type="{{showPasswordRe ? 'text' : 'password'}}" [(ngModel)]="reTypePassword" class="form-control"
+                    [ngModelOptions]="{standalone: true}">
+                </div>
+                <span class="show-password2 fa" style="margin-top: 10px" [ngClass]="{'fa-eye': showPasswordRe, 'fa-eye-slash': !showPasswordRe}"
+                    (click)="showPasswordRe = !showPasswordRe"></span>
+                
+              </div>
+            </div>
+            <div class="col-sm-12 text-center" *ngIf="!editProfile" style="margin-top:20px;">
+              <button type="button" (click)="changePasswords()"  class="btn btn-primary waves-effect waves-light">Save</button>
+              &nbsp;
+              <button type="button" class="btn btn-danger waves-effect waves-light"
+                (click)="toggleEditProfile()">Cancel</button>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>

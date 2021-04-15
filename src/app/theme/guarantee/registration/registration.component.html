@@ -1,0 +1,195 @@
+<div class="card">
+  <div class="card-header">
+    <h5>{{'MENU.BANK_GUARANTEE' | translate}} </h5>
+  </div>
+  <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="pull-left mb-2 mr-2">
+            <button type="button" *ngIf="createPriv"
+            class="btn btn-primary waves-effect waves-light"
+            routerLink="/registration-create">
+                {{ 'BUTTON.CREATE_NEW_BG' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    <div class="table-content crm-table">
+      <div class="project-table">
+        <div id="crm-contact" class="dt-responsive" *ngIf="data | async as data">
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered full-data-table" 
+              [mfData]="dataList | dataFilterCustom : filter" 
+              #mf="mfDataTable" 
+              [mfRowsOnPage]="rowsOnPage"
+              [(mfSortBy)]="sortBy" 
+              [(mfSortOrder)]="sortOrder">
+                <thead>
+                <tr>
+                  <th *ngIf="deletePriv"></th>
+                  <th style="height: 50px;">
+                    <mfDefaultSorter  by="nomor_jaminan">{{ 'LABEL.NOMOR_JAMINAN' | translate }}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="nomor_amendment">{{ 'LABEL.AMENMENDT_NOMOR' | translate }}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="applicant">{{'LABEL.APPLICANT' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="jenis_produk">{{ 'MENU.JENIS_PRODUK' | translate }}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="jenis_jaminan">{{ 'MENU.JENIS_JAMINAN' | translate }}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="nama_beneficiary">{{ 'MENU.BENEFICAIRY' | translate }}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="nomor_kontrak">{{ 'LABEL.NOMOR_KONTRAK' | translate }}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="nomor_kontrak">{{ 'LABEL.TANGGAL_TERBIT' | translate }}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="tanggal_batas_claim">{{'LABEL.TANGGAL_BATAS_CLAIM' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter>{{'LABEL.SURAT_KONFIRMASI' | translate}}</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter  by="bank_guarantee_status">Status</mfDefaultSorter>
+                  </th>
+                </tr>
+                <tr>
+                  <td *ngIf="deletePriv"></td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.nomor_jaminan" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.nomor_amendment" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.applicant" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.jenis_produk" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.jenis_jaminan" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.nama_beneficiary" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.nomor_kontrak" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.tanggal_terbit" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.tanggal_batas_claim" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                  <td></td>
+                  <td>
+                    <input class="form-control" 
+                    [(ngModel)]="filter.bank_guarantee_status" 
+                    (ngModelChange)="filterChanged($event)">
+                  </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of mf.data; let i = index;" style="margin: auto;">
+                    <td  *ngIf="deletePriv">
+                        <label class="form-check-label" >
+                            <input 
+                            *ngIf="statusCheck(item.bank_guarantee_status)"
+                            (click)="handleCheckedToProses(item)" 
+                            [checked]="item.checked" 
+                            type="checkbox">
+                        </label>
+                    </td>
+                  <td style="height: 50px;">
+                      <a href="javascript:;"
+                      class="m-r-15 crm-action-view text-info" 
+                      routerLink="/registration-edit/{{item.id}}">{{item.nomor_jaminan}}</a>
+                  </td>
+                  <td>{{item.nomor_amendment}}</td>
+                  <td>{{item.applicant}}</td>
+                  <td>{{item.jenis_produk}}</td>
+                  <td>{{item.jenis_jaminan}}</td>
+                  <td>{{item.nama_beneficiary}}</td>
+                  <td>{{item.nomor_kontrak}}</td>
+                  <td>{{item.tanggal_terbit | date :'dd-MM-yyyy'}}</td>
+                  <td>{{item.tanggal_batas_claim | date :'dd-MM-yyyy'}}</td>
+                  <td>
+                    <button 
+                    *ngIf="item.bank_guarantee_status !== 'PENDING BG' 
+                    && item.bank_guarantee_status !=='BG FROM STAGING'
+                    && item.bank_guarantee_status !=='WAITING FOR APPROVAL'"
+                    (click)="handleDownloadSuratKonfirmasi(item.id)" 
+                    class="text-danger" title='Download'><i
+                      class="fa fa-file-pdf-o"></i></button>
+                  </td>
+                  <td>{{item.bank_guarantee_status}}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                      <td colspan="11">
+                        <div class="float-left">
+                          <label class="label-control" style="margin-bottom: 0;">{{'LABEL.SHOW' | translate}}
+                            <select class="form-control input-sm full-data-show-entry" 
+                            [(ngModel)]="rowsOnPage">
+                              <option [ngValue]="10">10</option>
+                              <option [ngValue]="25">25</option>
+                              <option [ngValue]="50">50</option>
+                              <option [ngValue]="100">100</option>
+                            </select>
+                            {{'LABEL.ROWS' | translate}}
+                          </label>
+                        </div>
+                        <div class="float-right">
+                          <mfBootstrapPaginator>
+                          </mfBootstrapPaginator>
+                        </div>
+                      </td>
+                    </tr>
+                  </tfoot>
+              </table>
+              </div>
+
+              <div  *ngIf="deletePriv" class="form-group row">
+                  <div class="col-sm-2">
+                      <button 
+                      (click) = handleDeleteData();
+                      class="btn btn-danger btn-md btn-block text-center m-b-20 ripple light">Delete</button>
+                  </div>
+              </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-spinner #spinner></app-spinner>
+  
