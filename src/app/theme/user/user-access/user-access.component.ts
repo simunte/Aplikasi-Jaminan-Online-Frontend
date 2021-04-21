@@ -489,13 +489,13 @@ export class UserAccessComponent implements OnInit {
 
   checkPrivilageAddDelete(): boolean {
     let privilage = this.localStorageService.retrieve('privilege');
-    let allowedRoles = ['SYSTEM_OWNER', 'BANK_ADMIN_1_MAKER', 'BANK_ADMIN_2_MAKER', 'BENEFICIARY_ADMIN_1']
+    let allowedRoles = ['BANK_ADMIN_MAKER']
     return _.indexOf(allowedRoles, privilage.code) != -1
   }
 
   checkPrivilageApproveReject(): boolean {
     let privilage = this.localStorageService.retrieve('privilege');
-    let allowedRoles = ['SYSTEM_OWNER', 'BANK_ADMIN_1_CHECKER', 'BANK_ADMIN_2_CHECKER', 'BENEFICIARY_ADMIN_2']
+    let allowedRoles = ['BANK_ADMIN_CHECKER']
     return _.indexOf(allowedRoles, privilage.code) != -1
   }
 

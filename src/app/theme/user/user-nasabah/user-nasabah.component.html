@@ -1,0 +1,238 @@
+<ngb-tabset>
+  <ngb-tab title="{{ 'LABEL.USER_DETAIL' | translate }}" id="detail">
+    <ng-template ngbTabContent>
+      <div [@fadeInOutTranslate] class="m-t-15">
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">{{ 'LABEL.USERNAME' | translate }}</label>
+          <div class="col-sm-6">
+            <input [(ngModel)]="username" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">{{ 'LABEL.NASABAH_NAME' | translate }}</label>
+          <div class="col-sm-6">
+            <input [(ngModel)]="completeName" value=completeName class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">{{ 'LABEL.COMPANY_NAME' | translate }}</label>
+          <div class="col-sm-6">
+            <input [(ngModel)]="companyName" value=companyName class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">{{ 'LABEL.POSITION' | translate }}</label>
+          <div class="col-sm-6">
+            <input [(ngModel)]="position" value=position class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">{{ 'LABEL.NPWP_NUMBER' | translate }}</label>
+          <div class="col-sm-6">
+            <input [(ngModel)]="npwpNumber" value=npwpNumber class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">{{ 'LABEL.ID_NUMBER' | translate }}</label>
+          <div class="col-sm-6">
+            <input [(ngModel)]="idNumber" value=idNumber class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">{{ 'LABEL.NASABAH_EMAIL' | translate }}</label>
+          <div class="col-sm-6">
+            <input [(ngModel)]="employeeEmail" class="form-control">
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="{{ 'LABEL.DOCUMENT_NASABAH' | translate }}" id="dokumen">
+    <ng-template ngbTabContent>
+      <div [@fadeInOutTranslate] class="m-t-15">
+        <ng-container *ngTemplateOutlet="support_dokumen"></ng-container>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+
+<ng-template #support_dokumen>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">{{ 'LABEL.SIGNATURE' | translate }}</label>
+    <div class="col-sm-6">
+      <input type="file" 
+      #uploadOne (click)="uploadOne.value=null" placeholder="" (change)="uploadDocument('Signature', '1')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 0">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('Signature')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-6">
+      <div *ngIf="signatureLoaded" class="form-group row">
+        <div class="col-md-9">
+          <div class="preloader3 loader-block" *ngIf="!signatureLoaded">
+            <div class="circ1"></div>
+            <div class="circ2"></div>
+            <div class="circ3"></div>
+            <div class="circ4"></div>
+          </div>
+          <ng-container *ngIf="signature && signatureLoaded">
+            <img [src]="signature" alt="Signature" style="width:200px;height:100px;">
+          </ng-container>
+          <ng-container *ngIf="!signature && signatureLoaded">
+            <span class="fa fa-image" style="width:200px;height:100px;font-size:100px;"></span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">Akta Pendirian Perusahaan & Surat Pengesahan Kemenkumham</label>
+    <div class="col-sm-6">
+      <input type="file" #uploadTwo (click)="uploadTwo.value=null" placeholder="" (change)="uploadDocument('Akta Pendirian', '2')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 1">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('Akta Pendirian')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">Akta Perubahan Perusahaan & Surat Pengesahan Kemenkumham</label>
+    <div class="col-sm-6">
+      <input type="file" #uploadThree (click)="uploadThree.value=null" placeholder="" (change)="uploadDocument('Akta Perubahan', '3')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 2">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('Akta Perubahan')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">SIUP/SIJUK, TDP, SKT, PKP, NPWP, SKDP/U & Keanggotan Asosiasi</label>
+    <div class="col-sm-6">
+      <input type="file" #uploadFour (click)="uploadFour.value=null" placeholder="" (change)="uploadDocument('SIUP', '4')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 3">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('SIUP')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">KTP & NPWP Pengurus Perusahaan</label>
+    <div class="col-sm-6">
+      <input type="file" #uploadFive (click)="uploadFive.value=null" placeholder="" (change)="uploadDocument('KTP NPWP', '5')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 4">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('KTP NPWP')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">Laporan Keuangan 2 tahun terakhir</label>
+    <div class="col-sm-6">
+      <input type="file" #uploadSix (click)="uploadSix.value=null" placeholder="" (change)="uploadDocument('Laporan Keuangan', '6')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 5">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('Laporan Keuangan')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">Listed Pengalaman Kerja Perusahaan</label>
+    <div class="col-sm-6">
+      <input type="file" #uploadSeven (click)="uploadSeven.value=null" placeholder="" (change)="uploadDocument('Pengalaman Kerja', '7')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 6">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('Pengalaman Kerja')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">Listed Tenaga Ahli Perusahaan</label>
+    <div class="col-sm-6">
+      <input type="file" #uploadEight (click)="uploadEight.value=null" placeholder="" (change)="uploadDocument('Tenaga Ahli', '8')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 7">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('Tenaga Ahli')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">Listed Daftar Peralatan Kerja</label>
+    <div class="col-sm-6">
+      <input type="file" #uploadNine (click)="uploadNine.value=null" placeholder="" (change)="uploadDocument('Daftar Peralatan', '9')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 8">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('Daftar Peralatan')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">SPKMGR Tertandatangan</label>
+    <div class="col-sm-6">
+      <input type="file" #uploadTen (click)="uploadTen.value=null" placeholder="" (change)="uploadDocument('SPKMGR', '10')"
+        class="form-control" accept="application/pdf">
+    </div>
+    <div class="col-sm-1"
+    *ngIf="supportDocument.length > 9">
+        <button
+        class="text-danger"
+          (click)="handleDownloadPDF('SPKMGR')">
+          <i class="fa fa-file-pdf-o"></i>
+        </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-10 text-right">
+      <button (click)="saveDetailNasabah()" class="btn btn-primary btn-md text-center m-b-20 ripple light">Submit</button>
+    </div>
+  </div>
+</ng-template>
+<app-spinner #spinner></app-spinner>

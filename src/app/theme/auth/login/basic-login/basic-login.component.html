@@ -75,8 +75,8 @@
                   <a href="javascript:;" class="m-r-15 crm-action-view text-info"
                     (click)="modalDefault.show();">{{ 'LABEL.CONTACT_US' | translate }}</a>
                   <br>
-                  <!-- <a href="javascript:;" class="m-r-15 crm-action-view text-info"
-                    (click)="modalDefaultTAC.show();">Terms And Condition</a> -->
+                  <a href="javascript:;" class="m-r-15 crm-action-view text-info"
+                    (click)="openMyModal()">Daftar Akun</a>
                 </div>
               </div>
             </div>
@@ -102,6 +102,61 @@
   <div class="app-modal-body">
     <strong style="font-size:20px">PT. Bank UOB Indonesia</strong>
     <p style="font-size: 15px">Call Center : 14008</p>
+  </div>
+</app-modal-basic>
+
+<app-modal-basic #modalNasabah>
+  <div class="app-modal-header">
+    <h4 class="modal-title">{{ 'LABEL.DAFTAR_AKUN' | translate }}</h4>
+    <button type="button" class="close basic-close" (click)="modalNasabah.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="app-modal-body">
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">{{ 'LABEL.USERNAME' | translate }}</label>
+      <div class="col-md-12">
+        <input [(ngModel)]="usernameNsb" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">{{ 'LABEL.NASABAH_EMAIL' | translate }}</label>
+      <div class="col-md-12">
+        <input [(ngModel)]="emailNsb" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">{{ 'LABEL.PASSWORD' | translate }}</label>
+      <div class="col-md-12">
+        <div class="form-group form-primary">
+          <input type="password" hidden>
+          <input type="{{showPasswordNew ? 'text' : 'password'}}" autocomplete="off" [(ngModel)]="passwordNsb" class="form-control"
+          [ngModelOptions]="{standalone: true}" #newNsbPass>
+          <span class="show-password-nsb fa" [ngClass]="{'fa-eye': showPasswordNew, 'fa-eye-slash': !showPasswordNew}"
+            (click)="showPasswordNew = !showPasswordNew"></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">{{ 'LABEL.RETYPE_PASSWORD' | translate }}</label>
+      <div class="col-md-12">
+        <div class="form-group form-primary">
+          <input type="password" hidden>
+          <input type="{{showPasswordRe ? 'text' : 'password'}}" autocomplete="off" [(ngModel)]="repasswordNsb" class="form-control"
+          [ngModelOptions]="{standalone: true}" #newRePass>
+          <span class="show-password-nsb fa" [ngClass]="{'fa-eye': showPasswordRe, 'fa-eye-slash': !showPasswordRe}"
+            (click)="showPasswordRe = !showPasswordRe"></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12 text-right">
+        <button (click)="daftarAkun()" class="btn btn-primary btn-md btn-block text-center m-b-20 ripple light">Daftar</button>
+      </div>
+    </div>
+    <!-- <perfect-scrollbar class="overflow-container" [style.width]="'100%'" [style.height]="'500px'" [config]="{}">
+      <app-user-nasabah></app-user-nasabah>
+    </perfect-scrollbar> -->
   </div>
 </app-modal-basic>
 
@@ -169,5 +224,5 @@
 
 <app-spinner #spinner></app-spinner>
 <div class="card-header" style="position: absolute; bottom: 0; width: 100%">
-  <p> UOB Indonesia Merupakan Lembaga Perbankan <br> Yang Terdaftar Dan Diawasi Oleh Otoritas Jasa Keuangan </p>
+  <p> Bank XXX Indonesia Merupakan Lembaga Perbankan <br> Yang Terdaftar Dan Diawasi Oleh Otoritas Jasa Keuangan </p>
 </div>

@@ -17,6 +17,10 @@ const routes: Routes = [
         path: 'login',
         loadChildren: './theme/auth/login/basic-login/basic-login.module#BasicLoginModule'
       },
+      {
+        path: 'nasabah',
+        loadChildren: './theme/user/user.module#UserModule'
+      },
     ]
   },
   {

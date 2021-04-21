@@ -16,6 +16,10 @@ import { TcaIdComponent } from './tca/tca-id/tca-id.component';
     FormsModule,
     ToastyModule.forRoot(),
   ],
-  declarations: [BasicLoginComponent, TcaEnComponent, TcaIdComponent]
+  declarations: [
+    BasicLoginComponent, 
+    TcaEnComponent, 
+    TcaIdComponent
+  ]
 })
 export class BasicLoginModule { }

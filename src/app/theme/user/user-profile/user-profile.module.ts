@@ -7,6 +7,7 @@ import {SharedModule} from '../../../shared/shared.module';
 import {QuillEditorModule} from 'ngx-quill-editor/index';
 import {DataTableModule} from 'angular2-datatable';
 import {HttpClientModule} from '@angular/common/http';
+import { UserNasabahComponent } from '../user-nasabah/user-nasabah.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     DataTableModule,
   ],
-  declarations: [UserProfileComponent]
+  declarations: [UserProfileComponent, 
+    UserNasabahComponent]
 })
 export class UserProfileModule { }

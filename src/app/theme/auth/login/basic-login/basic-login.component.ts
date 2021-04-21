@@ -9,6 +9,7 @@ import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 import { ToastyService } from 'ng2-toasty';
 import { TranslateService } from '@ngx-translate/core';
 import { Http } from '@angular/http';
+import { MasterDataService } from 'src/app/services/master-data.service';
 
 @Component({
   selector: 'app-basic-login',
@@ -17,6 +18,7 @@ import { Http } from '@angular/http';
 })
 export class BasicLoginComponent implements OnInit {
   @ViewChild('modalDefaultTAC') modalDefaultTAC: ModalBasicComponent;
+  @ViewChild('modalNasabah') modalNasabah: ModalBasicComponent;
   @ViewChild('modalDefaultPassword') modalDefaultPassword: ModalBasicComponent;
   @ViewChild('spinner') spinner: SpinnerComponent;
   @ViewChild('agree') btnAgree: ElementRef;
@@ -31,6 +33,7 @@ export class BasicLoginComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private router: Router,
     public translate: TranslateService,
+    private _masterDataService: MasterDataService,
     private http: Http) {
     translate.setDefaultLang('en');
     this.currentLang = 'en';
@@ -38,8 +41,14 @@ export class BasicLoginComponent implements OnInit {
 
   ngOnInit() {
     document.querySelector('body').setAttribute('themebg-pattern', 'theme1');
-
   }
+
+  //new nasabah
+  usernameNsb: string;
+  emailNsb: string;
+  passwordNsb: string;
+  repasswordNsb: string;
+  //end nasabah
 
   privilege: any;
   isExternal: any;
@@ -201,6 +210,64 @@ export class BasicLoginComponent implements OnInit {
         this.toastService.error(errorBody.message || errorBody.error_description);
       })
     }
+  }
+
+  
+  selectedRoleObj = [];
+  selectedRole = null;
+  openMyModal(){
+    this._masterDataService.getAllRole().subscribe(data => {
+        if(data){
+          data.forEach(element => {
+            if(element.code == "NASABAH"){
+              this.selectedRoleObj.push(element);
+              this.selectedRole = element.name;
+            }
+          }); 
+        }
+      });
+    this.modalNasabah.show();
+  }
+  daftarAkun(){
+    this.spinner.isSpinnerVisible = true;
+    let strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    if(this.usernameNsb == '' || this.emailNsb == '' || this.passwordNsb == '' || this.usernameNsb == null || this.emailNsb == null || this.passwordNsb == null){
+      this.toastService.warning('Field Tidak Boleh Kosong');
+      this.spinner.isSpinnerVisible = false;
+    }else if(this.passwordNsb != this.repasswordNsb){
+      this.toastService.warning('Isi Password dan Retype Password Harus Sama');
+      this.spinner.isSpinnerVisible = false;
+    }else if (!strongRegex.test(this.passwordNsb)) {
+      this.toastService.warning('Password terdiri minimal 8 character, terdiri dari special character dan alphanumeric');
+      this.spinner.isSpinnerVisible = false;
+    }else{
+      var payload = {
+        id : null,
+        username : this.usernameNsb,
+        first_name : this.usernameNsb,
+        email : this.emailNsb,
+        password : this.passwordNsb,
+        beneficiaryId : null,
+        signature : null,
+        position : null,
+        isExternal : true,
+        nama_beneficiary : null,
+        roles : this.selectedRoleObj
+      }
+      this._masterDataService.addUserNasabah(payload).subscribe(data => {
+        if (data) {
+          this.toastService.success('Sukses tambah user')
+          this.router.navigate(['/login'])
+          this.spinner.isSpinnerVisible = false;
+        }
+      }, error => {
+        this.spinner.isSpinnerVisible = false;
+        let errorBody = error._body ? JSON.parse(error._body) : null;
+        this.toastService.error(errorBody.message || errorBody.error_description);
+      })
+    }
+    
+    
   }
 
   closeModalTAC() {

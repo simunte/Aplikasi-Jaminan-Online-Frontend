@@ -223,6 +223,12 @@ export class MasterDataService extends BaseService {
   getAllRoleByUser() {
     return this.getAllData(Configuration.ROLEUSER);
   }
+
+  getAllRole() {
+    return this.getData(Configuration.ALL_ROLE);
+  }
+
+
   saveRoleTemp(data) {
     return this.postData(Configuration.ROLE_TEMP, data)
   }
@@ -236,6 +242,10 @@ export class MasterDataService extends BaseService {
     return this.postData(Configuration.USER, data);
   }
 
+  addUserNasabah(data) {
+    return this.postNoAuth(Configuration.USER_NASABAH, data);
+  }
+
   approveOrRejectUser(data) {
     return this.postData(Configuration.APPROVE_REJECT_USER, data);
   }
@@ -247,6 +257,16 @@ export class MasterDataService extends BaseService {
   getUser(username) {
     return this.getDataHeaderNoParams(Configuration.USER + "/" + username)
   }
+
+  //NASABAH
+  saveDetailNasabah(data) {
+    return this.postData(Configuration.NASABAH, data);
+  }
+
+  getDetailNasabah(username) {
+    return this.getDataHeaderNoParams(Configuration.NASABAH + "/" + username)
+  }
+  //END NASABAH
 
   unlockUser(username) {
     return this.postData(Configuration.USER_UNLOCK, username)

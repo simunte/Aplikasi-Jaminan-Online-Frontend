@@ -34,6 +34,10 @@ const routes: Routes = [
         path: 'user-group/:status',
         loadChildren: './user-group/user-group.module#UserGroupModule'
       },
+      {
+        path: 'user-nasabah-create',
+        loadChildren: './user-nasabah/user-nasabah.module#UserNasabahModule'
+      }
     ]
   }
 ];

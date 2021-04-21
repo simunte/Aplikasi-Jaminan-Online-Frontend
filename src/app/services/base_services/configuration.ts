@@ -1,7 +1,6 @@
 export class Configuration {
   //BASE
-  public static get BASE_HOST(): string { return 'https://ajo.bgonline.uob.co.id/'; }
-  // public static get BASE_HOST(): string { return 'http://localhost:8083/'; }
+  public static get BASE_HOST(): string { return 'http://localhost:8083/'; }
   public static get BASE_URL(): string { return 'api/v1/'; }
   public static get BASE_URL_APU(): string { return 'apu/v1/'; }
   public static get API_URL(): string { return this.BASE_HOST + this.BASE_URL; }
@@ -11,17 +10,21 @@ export class Configuration {
   public static get LOGIN(): string { return this.BASE_HOST + 'oauth/token'; }
   public static get LOGOUT(): string { return this.API_URL + 'logout'; }
   public static get USER(): string { return this.API_URL + 'users'; }
+  public static get NASABAH(): string { return this.API_URL + 'nasabah'; }
+  public static get USER_NASABAH(): string { return this.APU_URL + 'users'; }
   public static get ROLE(): string { return this.API_URL + 'role'; }
   public static get ROLE_CUSTOMIZE(): string { return this.API_URL + 'role-customize'; }
   public static get REGISTRATION(): string { return this.API_URL + 'registration'; }
   public static get CONFIRMATION(): string { return this.API_URL + 'confirmation'; }
   public static get FILE(): string { return this.API_URL + 'file'; }
+  public static get SUPPORT_FILE(): string { return this.API_URL + 'dokumen/pendukung'; }
   public static get HISTORY(): string { return this.API_URL + 'history'; }
   public static get DASHBOARD(): string { return this.API_URL + 'dashboard'; }
   public static get MENUS(): string { return this.API_URL + 'menus'; }
   public static get COLUMN(): string { return this.API_URL + 'column'; }
   public static get DELETEROLE(): string { return this.API_URL + 'delete-role'; }
   public static get APPROVEORREJECT(): string { return this.API_URL + 'action'; }
+  public static get ALL_ROLE(): string { return this.APU_URL + 'roles'; }
   public static get ROLEUSER(): string { return this.API_URL + 'role-user-login'; }
   public static get FIRSTLOGIN(): string { return this.API_URL + 'first-login'; }
   public static get CHANGE_PASSWORD(): string { return this.API_URL + 'change-password'; }

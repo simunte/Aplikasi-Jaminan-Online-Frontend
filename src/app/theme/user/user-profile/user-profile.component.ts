@@ -33,6 +33,7 @@ import { ToastService } from 'src/app/services/toast.service';
 export class UserProfileComponent implements OnInit {
   editProfile = true;
   editProfileIcon = 'icofont-edit';
+  isNasabah: boolean = true;
 
   userProfile: any = {};
   changePassword: any = {};

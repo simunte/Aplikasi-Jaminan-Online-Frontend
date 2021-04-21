@@ -36,7 +36,7 @@ export interface Menu {
 @Injectable()
 export class MenuItems {
   MENUITEMS: Menu[] = [{
-    label: 'UOB AJO Menu',
+    label: 'AJO Menu',
     main: [
       {
         state: 'dashboard',

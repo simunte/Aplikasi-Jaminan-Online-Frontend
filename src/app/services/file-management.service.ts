@@ -34,6 +34,23 @@ export class FileManagementService {
       .map((res: any) => res.blob());
   }
 
+  downloadSignatureNasabah(fileUrl: string): Observable<File> {
+    let url = Configuration.FILE + "/download/nasabah?fileUrl=" + fileUrl;
+    let header = new Headers();
+    let token = this.localStorageService.retrieve('token');
+    header.append('Authorization', 'bearer ' + token);
+    header.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ responseType: ResponseContentType.Blob, headers: header });
+    return this.http
+      .get(url, options)
+      .map((res: any) => res.blob());
+  }
+
+  downloadSupportDocument(fileUrl : string){
+    let url = Configuration.FILE + "/download/nasabah?fileUrl=" + fileUrl;
+    this.createPDF(url);
+  }
+
   downloadFile(propertyId: string, fileName: string) {
     let url = Configuration.FILE + "/download?fileName=" + fileName;
     this.createPDF(url);

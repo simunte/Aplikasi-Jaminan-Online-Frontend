@@ -191,7 +191,6 @@ export class JenisJaminanComponent implements OnInit {
   checkPrivilage(access): boolean {
     let privilage = this.localStorageService.retrieve('privilege');
     let roleMenu = privilage.menus.filter(x => x.alias_menu == 'trans_guarantee')[0];
-
     switch (access) {
       case 'CREATE':
         return roleMenu.create_access;

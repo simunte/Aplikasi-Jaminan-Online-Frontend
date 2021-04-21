@@ -1,5 +1,8 @@
 <div class="card">
-  <div class="card-body">
+  <div class="card-body" *ngIf="isNasabah">
+    <app-user-nasabah></app-user-nasabah>
+  </div>
+  <div class="card-body" *ngIf="!isNasabah">
     <ngb-tabset>
       <ngb-tab title="Detail User" id="guarantee">
         <ng-template ngbTabContent>

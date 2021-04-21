@@ -40,18 +40,6 @@
         <div *ngIf="showBeneficiary" class="form-group row">
           <label class="col-sm-2 col-form-label" [innerHTML]="'LABEL.BENEFICIARY' | translate"></label>
           <div class="col-md-5">
-            <!-- <div ngbDropdown class="d-inline-block">
-              <button
-                class="btn btn-outline-secondary  dropdown--bg--border input-round dropdown-style-modal custome-width-600px"
-                id="jenis_produk"
-                ngbDropdownToggle>{{selectedBeneficiary == null ? 'Pilih Beneficiary' : selectedBeneficiary}}</button>
-              <div ngbDropdownMenu style="max-height: 150px; overflow: scroll;">
-                <button class="dropdown-item" (click)="handleBeneficiary(bnf)"
-                  *ngFor="let bnf of allBeneficiary; let index = index">{{bnf.nama_beneficiary}}</button>
-              </div>
-              <br>
-            </div> -->
-
             <ng-select [ngClass]="'ng-select'" [options]="beneficaryDDL" [(ngModel)]="selectedBeneficiary"
               [placeholder]="'LABEL.CHOOSE_BENEFICIARY' | translate" (selected)="handleBeneficiary($event)">
             </ng-select>
@@ -63,17 +51,6 @@
 
             <ng-select [ngClass]="'ng-select'" [options]="roleDDL" [(ngModel)]="selectedRole"
               [placeholder]="'LABEL.CHOOSE_GROUP' | translate" (selected)="handleRole($event)"> {{ 'LABEL.USER_GROUP' | translate }} </ng-select>
-            <!--
-            <div ngbDropdown class="d-inline-block">
-              <button
-                class="btn btn-outline-secondary  dropdown--bg--border input-round dropdown-style-modal custome-width-600px"
-                id="jenis_produk" ngbDropdownToggle>{{selectedRole == null ? 'Pilih Group' : selectedRole}}</button>
-              <div ngbDropdownMenu style="max-height: 150px; overflow: scroll;">
-                <button class="dropdown-item" (click)="handleRole(role)"
-                  *ngFor="let role of allRole; let index = index">{{role.name}}</button>
-              </div>
-              <br>
-            </div> -->
 
           </div>
         </div>

@@ -1,5 +1,3 @@
-import { Role } from '../../user-group/role';
-
 export class CreateUser{
     id:any
     email:string = null
@@ -10,6 +8,6 @@ export class CreateUser{
     beneficiaryId:string = null
     username:string = null
     position:string = null
-    isExternal: boolean = false;
-    nama_beneficiary: string = null;
+    
+
 }

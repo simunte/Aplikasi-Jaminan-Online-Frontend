@@ -27,6 +27,8 @@ export class UserAccessCreateComponent implements OnInit {
   isSelectedRole: boolean = false;
   selectedBeneficiary: any;
   selectedBeneficiaryObj: any;
+  //model
+  isExternal: boolean = false;
   username: string = null;
   employeeName: string = null;
   employeeEmail: string = null;
@@ -143,8 +145,16 @@ export class UserAccessCreateComponent implements OnInit {
     this.selectedRole = data.name;
     if (data.code == 'TRO_CHECKER') {
       this.showSignature = true;
-    } else {
+      this.showBeneficiary = false;
+      this.isExternal = false;
+    } else if(data.code == "BENEFICIARY_USER"){
+      this.showBeneficiary = true;
       this.showSignature = false;
+      this.isExternal = true;
+    }else {
+      this.showSignature = false;
+      this.showBeneficiary = false;
+      this.isExternal = false;
     }
   }
 
@@ -184,6 +194,8 @@ export class UserAccessCreateComponent implements OnInit {
     objRequest.beneficiaryId = this.selectedBeneficiaryObj;
     objRequest.signature = this.urlSignature;
     objRequest.position = this.position;
+    objRequest.isExternal = this.isExternal;
+    objRequest.nama_beneficiary = this.selectedBeneficiary;
     if (!this.isSelectedRole) {
       objRequest.roles = null;
     } else {
@@ -191,7 +203,6 @@ export class UserAccessCreateComponent implements OnInit {
     }
     this.masterDataService.addUser(objRequest).subscribe(data => {
       if (data) {
-        
         this.toastService.success('Sukses tambah user')
         this.router.navigate(['/user/user-access'])
         this.spinner.isSpinnerVisible = false;

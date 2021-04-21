@@ -83,6 +83,10 @@ export class BankGuaranteeService extends BaseService {
     return this.getDataHeader(Configuration.REGISTRATION + "/bg-pln", request);
   }
 
+  postUploadSupportDocument(file) {
+    return this.postFileUpload(Configuration.SUPPORT_FILE, file);
+  }
+
   postUploadFile(file, param) {
     return this.postFileUpload(Configuration.FILE + "/upload?type=" + param, file);
   }
