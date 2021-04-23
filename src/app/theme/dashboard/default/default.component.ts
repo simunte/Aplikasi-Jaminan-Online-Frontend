@@ -33,24 +33,15 @@ export class DefaultComponent implements OnInit {
     });
   }
 
-  handleRouterLink(status) {
-    const role_user = this.dataRolePrivilege.name;
-    if (role_user === 'TRO_MAKER' || role_user === 'TRO_CHECKER') {
-      if(status == 'WAITING FOR VERIFICATION' || status == 'WAITING CHECKER VERIFICATION'){
-        return '/report/verification/' + status;
-      }else if(status == 'VERIFIED BG' || status == 'WAITING CHECKER SETTLEMENT'){
+  handleRouterLink(status, user) {
+    if(user == 'user'){
+      return '/user/user-access/' + status;
+    }else{
+      if(status == 'APPROVED BG'){
         return '/report/settlement/' + status;
       }else{
         return '/registration/' + status;
       }
-    } else if (role_user === 'BENEFICIARY_USER') {
-      if(status == 'VERIFIED BG' || status == 'WAITING CHECKER SETTLEMENT'){
-        return '/report/settlement/' + status;
-      }else{
-        return '/report/verification/' + status;
-      }
-    } else {
-      return '/user/user-access/' + status;
     }
   }
 

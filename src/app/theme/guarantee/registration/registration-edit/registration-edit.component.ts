@@ -82,6 +82,7 @@ export class RegistrationEditComponent implements OnInit {
   today = new Date();
   todayDate = new Date();
   tempBatasClaimDate:any;
+  submitAction: string;
 
 
   selectedUraianPekerjaan:any = [];
@@ -238,6 +239,7 @@ export class RegistrationEditComponent implements OnInit {
         this.dataConfirmation = data.confirmation_data;
         this.tempBatasClaimDate = this.dataRegistration.tanggal_batas_claim;
         this.handleDefaultTitle(data.registration_data);
+        this.dataRegistration.applicant = this.usernameAssign;
         if(this.dataRegistration.bank_guarantee_status=='PENDING BG' || this.dataRegistration.bank_guarantee_status=='BG FROM STAGING' || this.dataRegistration.bank_guarantee_status=='REJECTED BG'){
           this.existSoftCopyJaminan=true;
         }
@@ -518,9 +520,11 @@ export class RegistrationEditComponent implements OnInit {
         beneficiary_id: this.selectedBeneficiary.id,
         currency_id: this.selectedCurrency.id,
         jenis_jaminan_id: this.selectedJenisJaminan.id,
+        doc_jenis_jaminan: this.dataRegistration.doc_jenis_jaminan,
         jenis_produk_id: this.selectedJenisProduk.id,
         nama_bank_penerbit: this.dataRegistration.nama_bank_penerbit,
         nilai_jaminan: this.dataRegistration.nilai_jaminan,
+        nilai_kontrak: this.dataRegistration.nilai_kontrak,
         nomor_jaminan: this.dataRegistration.nomor_jaminan,
         nomor_amendment: this.dataRegistration.nomor_amendment,
         nomor_kontrak: this.dataRegistration.nomor_kontrak,
@@ -621,12 +625,30 @@ export class RegistrationEditComponent implements OnInit {
     });
   }
 
+  handleDownloadPDFJaminan(){
+    this.fileManagementService.downloadSupportDocument(this.dataRegistration.doc_jenis_jaminan);
+  }
+
   handleApprovalAcc(){
     this.spinner.isSpinnerVisible = true;
     this.handleSaveConfirmation(false);
+    switch(this.dataRolePrivilege.code){
+      case "TRO_MAKER":
+        this.submitAction = "APPROVAL";
+        break;
+      case "TRO_CHECKER":
+        this.submitAction = "VERIFICATION";
+        break;
+      case "KOMITE":
+        this.submitAction = "VALIDATION";
+        break;
+      case "BENEFICIARY_USER":
+        this.submitAction = "CONFIRMATION";
+        break;
+    }
     var approvalRequest = {
         id_jaminan: this.dataRegistration.id,
-        action:"APPROVAL",
+        action:this.submitAction,
         notes:""
     }
     setTimeout(()=>{
@@ -753,7 +775,10 @@ export class RegistrationEditComponent implements OnInit {
       this.tabConfirmation = true;
       this.tabHistory = true;
       this.nextRegButton = false;
-      if(this.dataRegistration.bank_guarantee_status == 'WAITING FOR APPROVAL'){
+      if(this.dataRegistration.bank_guarantee_status == 'WAITING FOR APPROVAL'
+      ||this.dataRegistration.bank_guarantee_status == 'WAITING FOR VERIFICATION'
+      ||this.dataRegistration.bank_guarantee_status == 'WAITING FOR VALIDATION'
+      ||this.dataRegistration.bank_guarantee_status == 'WAITING FOR CONFIRMATION'){
         this.approveButton = true;
         this.rejectButton = true;
         this.nextButton = false;

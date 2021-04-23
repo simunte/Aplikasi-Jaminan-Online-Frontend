@@ -83,9 +83,11 @@ export class RegistrationCreateComponent implements OnInit {
     beneficiary_id: '',
     currency_id: '',
     jenis_jaminan_id: '',
+    doc_jenis_jaminan: '',
     jenis_produk_id: '',
     nama_bank_penerbit: 'PT. BANK UOB INDONESIA',
     nilai_jaminan: '',
+    nilai_kontrak: '',
     nomor_jaminan: '',
     nomor_amendment: '',
     nomor_kontrak: '',
@@ -112,6 +114,7 @@ export class RegistrationCreateComponent implements OnInit {
     this.dataRolePrivilege = this.localStorageService.retrieve('privilege');
     this.usernameAssign = this.localStorageService.retrieve('username');
     this.handleLoadMasterData();
+    this.dataRegistration.applicant = this.usernameAssign;
   }
 
   handleLoadMasterData(){
@@ -275,8 +278,17 @@ export class RegistrationCreateComponent implements OnInit {
 
   public fileName = ""
   @ViewChild("softcopyJaminan") softcopyJaminan
-  onSelectedSoftcopyJaminan(){
-    const files: { [key: string]: File } = this.softcopyJaminan.nativeElement.files;
+  @ViewChild("uploadJenisJaminanDoc") uploadJenisJaminanDoc
+  onSelectedSoftcopyJaminan(docType){
+    var files: { [key: string]: File } = {};
+    switch(docType){
+      case "jjsd":
+        files = this.uploadJenisJaminanDoc.nativeElement.files;
+        break;
+      default:
+        files = this.softcopyJaminan.nativeElement.files;
+        break;
+    }
     var formData  = new FormData();
     var extention = files[0].name.match(/\.[0-9a-z]+$/i);
     if (extention[0]==".pdf"){
@@ -285,16 +297,26 @@ export class RegistrationCreateComponent implements OnInit {
         const idJaminan = this.dataRegistration.id;
         const codeJaminan = this.jaminanCode;
         const tanggalTerbit = this.dataRegistration.tanggal_terbit;
-        this.registrationService.postUploadFileJaminan(formData,"pdf", idJaminan, codeJaminan, tanggalTerbit).subscribe(data=>{
-          this.dataRegistration.softcopy_jaminan_name = data.originalFileName;
-          this.dataRegistration.softcopy_jaminan_url = data.fileSaveUrl;
-          this.downloadPdf = true;
-        },
+        if(docType == "jjsd"){
+          this.registrationService.postUploadSupportDocument(formData).subscribe(data =>{
+            this.dataRegistration.doc_jenis_jaminan = data.fileSaveUrl;
+          },
           (error : any)=>{
             var error = JSON.parse(error._body);
             this.toastrService.warning('error', error.message);
-          }
-        );
+          })
+        }else{
+          this.registrationService.postUploadFileJaminan(formData,"pdf", idJaminan, codeJaminan, tanggalTerbit).subscribe(data=>{
+            this.dataRegistration.softcopy_jaminan_name = data.originalFileName;
+            this.dataRegistration.softcopy_jaminan_url = data.fileSaveUrl;
+            this.downloadPdf = true;
+          },
+            (error : any)=>{
+              var error = JSON.parse(error._body);
+              this.toastrService.warning('error', error.message);
+            }
+          );
+        }
       } else {
         this.toastrService.warning('warning', 'File size can not bigger than 5MB');
       }
@@ -308,6 +330,10 @@ export class RegistrationCreateComponent implements OnInit {
     let fileName = this.dataRegistration.softcopy_jaminan_url;
     let newFileName = fileName.slice(fileName.lastIndexOf("/")+1,fileName.length);
     this.fileManagementService.downloadFile('pdf',newFileName);
+  }
+
+  handleDownloadPDFJaminan(){
+    this.fileManagementService.downloadSupportDocument(this.dataRegistration.doc_jenis_jaminan);
   }
 
   handleHistoryByNomorJaminan(){
@@ -391,6 +417,9 @@ export class RegistrationCreateComponent implements OnInit {
       this.errorMessage.messageBool = false;
     }else if(data.nilai_jaminan == '' || data.nilai_jaminan == null){
       this.errorMessage.messageErr = 'Nilai Jaminan  tidak boleh kosong';
+      this.errorMessage.messageBool = false;
+    }else if(data.nilai_kontrak == '' || data.nilai_kontrak == null){
+      this.errorMessage.messageErr = 'Nilai Kontrak  tidak boleh kosong';
       this.errorMessage.messageBool = false;
     }else if(data.nomor_jaminan == '' || data.nomor_jaminan == null){
       this.errorMessage.messageErr = 'Nomor Jaminan tidak boleh kosong';
