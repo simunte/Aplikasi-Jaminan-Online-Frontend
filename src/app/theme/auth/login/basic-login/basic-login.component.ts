@@ -257,7 +257,8 @@ export class BasicLoginComponent implements OnInit {
       this._masterDataService.addUserNasabah(payload).subscribe(data => {
         if (data) {
           this.toastService.success('Sukses tambah user')
-          this.router.navigate(['/login'])
+          this.modalNasabah.hide();
+          this.router.navigate(['/login']);
           this.spinner.isSpinnerVisible = false;
         }
       }, error => {

@@ -149,6 +149,7 @@ export class RegistrationEditComponent implements OnInit {
     this.usernameAssign = this.localStorageService.retrieve('username');
     this.checkPrivilege();
     this.handleLoadData();
+    this.handleButtonShow();
     this.spinner.isSpinnerVisible= false;
 
     setTimeout(() => {}, 2800);
@@ -629,12 +630,31 @@ export class RegistrationEditComponent implements OnInit {
     this.fileManagementService.downloadSupportDocument(this.dataRegistration.doc_jenis_jaminan);
   }
 
+  buttonShow = "Next";
+  handleButtonShow(){
+    switch(this.dataRolePrivilege.code){
+      case "TRO_MAKER":
+        this.buttonShow = "Approve";
+        break;
+      case "TRO_CHECKER":
+        this.buttonShow = "Verify";
+        break;
+      case "KOMITE":
+        this.buttonShow = "Valid";
+        break;
+      case "BENEFICIARY_USER":
+        this.buttonShow = "Confirm";
+        break;
+    }
+  }
+
+
   handleApprovalAcc(){
     this.spinner.isSpinnerVisible = true;
     this.handleSaveConfirmation(false);
     switch(this.dataRolePrivilege.code){
       case "TRO_MAKER":
-        this.submitAction = "APPROVAL";
+        this.submitAction = "APPROVAL";;
         break;
       case "TRO_CHECKER":
         this.submitAction = "VERIFICATION";
@@ -860,9 +880,6 @@ export class RegistrationEditComponent implements OnInit {
     }else if(data.nilai_jaminan == '' || data.nilai_jaminan == null){
       this.toastrService.error('error','Nilai Jaminan  tidak boleh kosong');
       this.continue = false;
-    }else if(data.nomor_jaminan == '' || data.nomor_jaminan == null){
-      this.toastrService.error('error','Nomor Jaminan tidak boleh kosong');
-      this.continue = false;
     }else if(data.nomor_amendment == '' || data.nomor_amendment == null){
       this.toastrService.error('error','Nomor Amendment tidak boleh kosong');
       this.continue = false;
@@ -871,9 +888,6 @@ export class RegistrationEditComponent implements OnInit {
       this.continue = false;
     }else if(data.applicant == '' || data.applicant == null){
       this.toastrService.error('error','Applicant tidak boleh kosong');
-      this.continue = false;
-    }else if(data.softcopy_jaminan_name == '' || data.softcopy_jaminan_name == null){
-      this.toastrService.error('error','Softcopy Jaminan harus diupload');
       this.continue = false;
     }else if(data.tanggal_batas_claim == '' || data.tanggal_batas_claim == null){
       this.toastrService.error('error','Tanggal Batas Claim tidak boleh kosong');

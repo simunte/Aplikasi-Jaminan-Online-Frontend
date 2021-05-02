@@ -80,8 +80,8 @@ export class SettlementDetailComponent implements OnInit {
 
   checkPrivilage(): boolean {
     if((this.dataRegistration.bank_guarantee_status === 'VERIFIED BG' && this.privilage.code === 'TRO_MAKER')
-      || (this.dataRegistration.bank_guarantee_status === 'WAITING CHECKER SETTLEMENT' && this.privilage.code === 'TRO_CHECKER')
-      || (this.dataRegistration.bank_guarantee_status === 'VERIFIED BG' && this.privilage.code === 'BENEFICIARY_USER')){
+      || (this.dataRegistration.bank_guarantee_status === 'APPROVED BG' && this.privilage.code === 'TRO_CHECKER')
+      || (this.dataRegistration.bank_guarantee_status === 'APPROVED BG' && this.privilage.code === 'BENEFICIARY_USER')){
       return true;
     }else{
       return false;

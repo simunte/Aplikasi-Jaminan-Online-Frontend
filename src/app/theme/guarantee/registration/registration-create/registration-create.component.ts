@@ -421,9 +421,6 @@ export class RegistrationCreateComponent implements OnInit {
     }else if(data.nilai_kontrak == '' || data.nilai_kontrak == null){
       this.errorMessage.messageErr = 'Nilai Kontrak  tidak boleh kosong';
       this.errorMessage.messageBool = false;
-    }else if(data.nomor_jaminan == '' || data.nomor_jaminan == null){
-      this.errorMessage.messageErr = 'Nomor Jaminan tidak boleh kosong';
-      this.errorMessage.messageBool = false;
     }else if(data.nomor_amendment.toString() == '' || Number(data.nomor_amendment) < 0){
       this.errorMessage.messageErr = 'Nomor Amendment tidak boleh kosong atau lebih kecil dari 0';
       this.errorMessage.messageBool = false;
@@ -432,9 +429,6 @@ export class RegistrationCreateComponent implements OnInit {
       this.errorMessage.messageBool = false;
     }else if(data.applicant == '' || data.applicant == null){
       this.errorMessage.messageErr = 'Applicant tidak boleh kosong';
-      this.errorMessage.messageBool = false;
-    }else if(data.softcopy_jaminan_name == '' || data.softcopy_jaminan_name == null){
-      this.errorMessage.messageErr = 'Softcopy Jaminan harus diupload';
       this.errorMessage.messageBool = false;
     }else if(data.tanggal_batas_claim == '' || data.tanggal_batas_claim == null){
       this.errorMessage.messageErr = 'Tanggal Batas Claim tidak boleh kosong';

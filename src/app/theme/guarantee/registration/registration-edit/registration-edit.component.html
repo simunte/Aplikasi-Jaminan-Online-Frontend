@@ -14,7 +14,7 @@
                   <form action="">
                     <div class="card-body">
                       <div class="view-info" *ngIf="editProfile">
-                        <div class="form-group row">
+                        <div class="form-group row" *ngIf="dataRegistration.nomor_jaminan != ''">
                           <label class="col-sm-4 col-form-label">{{ 'LABEL.NOMOR_JAMINAN' | translate }}</label>
                           <div class="col-sm-8">
                             <input
@@ -299,15 +299,22 @@
                         </div>
 
                         <div class="form-group row"
-                        *ngIf="showDownloadSuratJaminan">
+                        *ngIf="showDownloadSuratJaminan && dataRegistration.softcopy_jaminan_name != ''">
                           <label class="col-sm-4 col-form-label"></label>
                           <div class="col-sm-8 col-md-6"
                           *ngIf="showDownloadSuratJaminan">
                               <button
+                                *ngIf="downloadPdf"
+                                class="text-danger doc-download"
+                                id="file_download"
+                                (click)="handleDownloadPDF()">
+                                <i class="fa fa-file-pdf-o"></i>
+                              </button>
+                              <!-- <button
                               class="btn btn-outline-secondary input-round custome-width-600px"
                                 id="file_download"
                                 (click)="handleDownloadPDF()">{{dataRegistration.softcopy_jaminan_name}}
-                              </button>
+                              </button> -->
                           </div>
                         </div>
                         <!-- end of row -->
@@ -396,11 +403,17 @@
                         <div class="form-group row">
                           <label class="col-sm-4 col-form-label">{{ 'LABEL.SOFTCOPY_OF_BANK_CONFIRMATION_LETTER' | translate }}</label>
                           <div class="col-sm-8">
-                            <button *ngIf="showDownloadSuratKonfirmasi"
+                            <button
+                              *ngIf="showDownloadSuratKonfirmasi"
+                              class="text-danger doc-download"
+                              (click)="handleDownloadSuratKonfirmasi()">
+                              <i class="fa fa-file-pdf-o"></i>
+                            </button>
+                            <!-- <button *ngIf="showDownloadSuratKonfirmasi"
                             class="btn btn-outline-secondary input-round custome-width-600px"
                                 id="file_download"
                                 (click)="handleDownloadSuratKonfirmasi()">Download Surat Konfirmasi
-                              </button>
+                              </button> -->
                           </div>
                         </div>
                         <!-- end of row -->
@@ -418,7 +431,7 @@
                       <div class="col-xl-12 col-md-6" >
                           <button *ngIf="approveButton"
                           class="btn btn-primary waves-effect waves-light"
-                          (click)="handleApprovalAcc()">{{'BUTTON.APPROVE' | translate}}</button>
+                          (click)="handleApprovalAcc()">{{buttonShow}}</button>
                           &nbsp;
                           <button *ngIf="rejectButton"
                           class="btn btn-danger waves-effect waves-light"
