@@ -286,37 +286,30 @@
                         <div class="form-group row"
                         *ngIf="dataRegistration.softcopy_jaminan_name === '' || existSoftCopyJaminan==true">
                           <label class="col-sm-4 col-form-label">{{ 'LABEL.SOFTCOPY_JAMINAN' | translate }}</label>
-                          <div class="col-xl-8 col-md-6">
-                            <input type="file"
-                            #softcopyJaminan
-                            (click)="softcopyJaminan.value=null"
-                            placeholder="{{dataRegistration.softcopy_jaminan_name}}"
-                            (change)="onSelectedSoftcopyJaminan()"
-                            accept="application/pdf"
-                            [disabled]="disableAction"
-                            class="form-control">
+                          <div class="col-sm-8 col-md-6"
+                          *ngIf="showDownloadSuratJaminan">
+                              <button
+                                class="text-danger doc-download"
+                                id="file_download"
+                                (click)="handleDownloadPDFJaminan('BG')">
+                                <i class="fa fa-file-pdf-o"></i>
+                              </button>
                           </div>
                         </div>
 
-                        <div class="form-group row"
+                        <!-- <div class="form-group row"
                         *ngIf="showDownloadSuratJaminan && dataRegistration.softcopy_jaminan_name != ''">
                           <label class="col-sm-4 col-form-label"></label>
                           <div class="col-sm-8 col-md-6"
                           *ngIf="showDownloadSuratJaminan">
                               <button
-                                *ngIf="downloadPdf"
                                 class="text-danger doc-download"
                                 id="file_download"
-                                (click)="handleDownloadPDF()">
+                                (click)="handleDownloadPDFJaminan('BG')">
                                 <i class="fa fa-file-pdf-o"></i>
                               </button>
-                              <!-- <button
-                              class="btn btn-outline-secondary input-round custome-width-600px"
-                                id="file_download"
-                                (click)="handleDownloadPDF()">{{dataRegistration.softcopy_jaminan_name}}
-                              </button> -->
                           </div>
-                        </div>
+                        </div> -->
                         <!-- end of row -->
                       </div>
                       <div class="form-group row">

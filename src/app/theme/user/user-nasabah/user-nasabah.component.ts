@@ -90,6 +90,7 @@ export class UserNasabahComponent implements OnInit {
     this.chooseGroup="";
     this.spinner.isSpinnerVisible = false;
     var username = this.localStorageservice.retrieve("username");
+    this.username = username;
     this.loadDetailNasabah(username);
   }
 
@@ -213,18 +214,25 @@ export class UserNasabahComponent implements OnInit {
     var result = false;
     if(this.companyName == ''){
       this.toastService.warning("Nama Perusahaan Tidak boleh kosong");
+      this.spinner.isSpinnerVisible = false;
     }else if(this.completeName == ''){
       this.toastService.warning("Nama Lengkap Tidak boleh kosong");
+      this.spinner.isSpinnerVisible = false;
     }else if(this.idNumber == ''){
       this.toastService.warning("Nomor KTP Tidak boleh kosong");
+      this.spinner.isSpinnerVisible = false;
     }else if(this.npwpNumber == ''){
       this.toastService.warning("Nomor NPWP Tidak boleh kosong");
+      this.spinner.isSpinnerVisible = false;
     }else if(this.position == ''){
       this.toastService.warning("Posisi/Jabatan Tidak boleh kosong");
+      this.spinner.isSpinnerVisible = false;
     }else if(this.supportDocument.length < 10){
       this.toastService.warning("Dokumen Tidak Lengkap");
+      this.spinner.isSpinnerVisible = false;
     }else if(this.employeeEmail == '' || this.username == ''){
       this.toastService.warning("Username dan Email Tidak boleh kosong");
+      this.spinner.isSpinnerVisible = false;
     }else{
       result = true;
     }
@@ -233,7 +241,7 @@ export class UserNasabahComponent implements OnInit {
 
   loadDetailNasabah(username){
     this.masterDataService.getDetailNasabah(username).subscribe(data => {
-      if(data != {} && data != null){
+      if(data != {} && data != null&& data.id != null ){
         this.companyName = data.company_name ;
         this.completeName = data.complete_name ;
         this.employeeEmail = data.email ;

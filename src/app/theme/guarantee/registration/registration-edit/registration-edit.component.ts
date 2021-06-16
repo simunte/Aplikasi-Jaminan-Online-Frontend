@@ -241,7 +241,7 @@ export class RegistrationEditComponent implements OnInit {
         this.tempBatasClaimDate = this.dataRegistration.tanggal_batas_claim;
         this.handleDefaultTitle(data.registration_data);
         this.dataRegistration.applicant = this.usernameAssign;
-        if(this.dataRegistration.bank_guarantee_status=='PENDING BG' || this.dataRegistration.bank_guarantee_status=='BG FROM STAGING' || this.dataRegistration.bank_guarantee_status=='REJECTED BG'){
+        if(this.dataRegistration.bank_guarantee_status !=='PENDING BG' || this.dataRegistration.bank_guarantee_status !=='BG FROM STAGING' || this.dataRegistration.bank_guarantee_status !=='REJECTED BG'){
           this.existSoftCopyJaminan=true;
         }
         if(this.dataRegistration.softcopy_jaminan_name !== null){
@@ -626,8 +626,13 @@ export class RegistrationEditComponent implements OnInit {
     });
   }
 
-  handleDownloadPDFJaminan(){
-    this.fileManagementService.downloadSupportDocument(this.dataRegistration.doc_jenis_jaminan);
+  handleDownloadPDFJaminan(param){
+    if(param == "BG"){
+      this.fileManagementService.downloadSupportDocument(this.dataRegistration.softcopy_jaminan_url);
+    }else{
+      this.fileManagementService.downloadSupportDocument(this.dataRegistration.doc_jenis_jaminan);
+    }
+    
   }
 
   buttonShow = "Next";
@@ -802,6 +807,10 @@ export class RegistrationEditComponent implements OnInit {
         this.approveButton = true;
         this.rejectButton = true;
         this.nextButton = false;
+        if(this.dataRegistration.bank_guarantee_status == 'WAITING FOR VALIDATION'
+        ||this.dataRegistration.bank_guarantee_status == 'WAITING FOR CONFIRMATION'){
+          this.showDownloadSuratKonfirmasi = true;
+        }
       }
       else if(this.dataRegistration.bank_guarantee_status !== 'WAITING FOR APPROVAL'
       && this.dataRegistration.bank_guarantee_status !== 'PENDING BG'
